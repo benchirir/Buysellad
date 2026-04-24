@@ -3,40 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SecondChance Admin • Marketplace Control Panel</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>SecondChance Admin • Master Control Panel</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg: #0a0e17;
-            --surface: #131923;
-            --surface-light: #1a2235;
-            --text: #e2e8f0;
-            --text-secondary: #94a3b8;
-            --primary: #4f46e5;
-            --primary-light: #6366f1;
+            --black: #0a0a0a;
+            --black-light: #1a1a1a;
+            --black-surface: #141414;
+            --gold: #c9a84c;
+            --gold-light: #d4b96a;
+            --gold-dark: #a68a3e;
+            --brown: #8b6914;
+            --brown-light: #a07818;
+            --grey: #6b7280;
+            --grey-light: #9ca3af;
+            --grey-dark: #374151;
+            --grey-surface: #1f2937;
+            --white: #e5e7eb;
+            --white-bright: #f9fafb;
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
             --info: #3b82f6;
-            --border: #1e293b;
-            --shadow: 0 4px 6px rgba(0,0,0,0.3);
+            --border: #2d2d2d;
+            --shadow: 0 8px 32px rgba(0,0,0,0.4);
+            --shadow-gold: 0 4px 20px rgba(201,168,76,0.3);
             --radius: 12px;
-            --transition: all 0.2s ease;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: var(--text);
+            background: var(--black);
+            color: var(--white);
             min-height: 100vh;
+            background-image: 
+                radial-gradient(ellipse at top right, rgba(201,168,76,0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(139,105,20,0.05) 0%, transparent 50%);
         }
 
         .admin-container {
@@ -46,10 +53,10 @@
 
         /* Sidebar */
         .sidebar {
-            width: 260px;
-            background: var(--surface);
-            border-right: 1px solid var(--border);
-            padding: 24px 0;
+            width: 280px;
+            background: var(--black-surface);
+            border-right: 1px solid rgba(201,168,76,0.2);
+            padding: 28px 0;
             display: flex;
             flex-direction: column;
             position: fixed;
@@ -58,25 +65,66 @@
             bottom: 0;
             z-index: 100;
             overflow-y: auto;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.5);
         }
 
         .sidebar-logo {
-            padding: 0 24px 24px;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 24px;
+            padding: 0 24px 28px;
+            border-bottom: 1px solid rgba(201,168,76,0.3);
+            margin-bottom: 28px;
         }
 
         .sidebar-logo h1 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary-light);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
         }
 
         .sidebar-logo span {
-            color: var(--text-secondary);
-            font-size: 0.8rem;
+            color: var(--grey-light);
+            font-size: 0.75rem;
             display: block;
-            margin-top: 4px;
+            margin-top: 6px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .master-account {
+            margin: 0 16px 20px;
+            padding: 16px;
+            background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(139,105,20,0.1));
+            border: 1px solid rgba(201,168,76,0.3);
+            border-radius: var(--radius);
+        }
+
+        .master-account-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--gold);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .master-account-number {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white-bright);
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .master-account-balance {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--gold);
+            margin-top: 6px;
         }
 
         .nav-section {
@@ -85,165 +133,236 @@
         }
 
         .nav-section-title {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--text-secondary);
+            letter-spacing: 2px;
+            color: var(--grey);
             padding: 0 12px;
-            margin-bottom: 8px;
-            font-weight: 600;
+            margin-bottom: 10px;
+            font-weight: 700;
         }
 
         .nav-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 10px 12px;
-            border-radius: 8px;
+            gap: 14px;
+            padding: 12px 16px;
+            border-radius: 10px;
             cursor: pointer;
             transition: var(--transition);
-            color: var(--text-secondary);
+            color: var(--grey-light);
             font-size: 0.9rem;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
+            font-weight: 500;
+            position: relative;
         }
 
         .nav-item:hover {
-            background: var(--surface-light);
-            color: var(--text);
+            background: rgba(201,168,76,0.08);
+            color: var(--gold-light);
         }
 
         .nav-item.active {
-            background: var(--primary);
-            color: white;
+            background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(139,105,20,0.1));
+            color: var(--gold);
+            border-left: 3px solid var(--gold);
+            font-weight: 600;
         }
 
         .nav-item i {
-            width: 20px;
+            width: 22px;
             text-align: center;
+            font-size: 1rem;
         }
 
         .nav-badge {
-            background: var(--danger);
-            color: white;
-            border-radius: 10px;
+            background: var(--gold);
+            color: var(--black);
+            border-radius: 12px;
             padding: 2px 8px;
             font-size: 0.7rem;
+            font-weight: 700;
             margin-left: auto;
+            min-width: 20px;
+            text-align: center;
         }
 
         /* Main Content */
         .main-content {
             flex: 1;
-            margin-left: 260px;
-            padding: 32px;
+            margin-left: 280px;
+            padding: 36px;
+            position: relative;
         }
 
         .top-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 32px;
+            margin-bottom: 36px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(201,168,76,0.2);
         }
 
         .top-bar h2 {
-            font-size: 1.8rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
             font-weight: 700;
+            background: linear-gradient(135deg, var(--white-bright), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .sync-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--success);
+        }
+
+        .sync-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
 
         .admin-profile {
             display: flex;
             align-items: center;
-            gap: 12px;
-            background: var(--surface);
-            padding: 8px 16px;
+            gap: 14px;
+            background: var(--black-light);
+            padding: 10px 20px;
             border-radius: 40px;
             cursor: pointer;
+            border: 1px solid rgba(201,168,76,0.3);
+            transition: var(--transition);
+        }
+
+        .admin-profile:hover {
+            border-color: var(--gold);
+            box-shadow: var(--shadow-gold);
         }
 
         .admin-avatar {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold));
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
+            color: var(--black);
+            font-size: 1.1rem;
         }
 
         /* Stats Cards */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
-            margin-bottom: 32px;
+            margin-bottom: 36px;
         }
 
         .stat-card {
-            background: var(--surface);
+            background: var(--black-surface);
             border-radius: var(--radius);
-            padding: 20px;
-            border: 1px solid var(--border);
+            padding: 24px;
+            border: 1px solid rgba(201,168,76,0.15);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--brown));
+            opacity: 0;
             transition: var(--transition);
         }
 
         .stat-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-2px);
+            border-color: var(--gold);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
         }
 
         .stat-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
 
         .stat-icon {
-            font-size: 1.5rem;
-            opacity: 0.8;
+            font-size: 1.8rem;
         }
 
         .stat-change {
-            font-size: 0.8rem;
-            padding: 4px 8px;
+            font-size: 0.75rem;
+            padding: 4px 10px;
             border-radius: 20px;
             font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
-        .change-up { background: rgba(16,185,129,0.2); color: var(--success); }
-        .change-down { background: rgba(239,68,68,0.2); color: var(--danger); }
+        .change-up { background: rgba(16,185,129,0.15); color: var(--success); }
+        .change-down { background: rgba(239,68,68,0.15); color: var(--danger); }
 
         .stat-value {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 800;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
         }
 
         .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+            color: var(--grey);
+            font-size: 0.85rem;
+            font-weight: 500;
         }
 
         /* Tables */
         .table-container {
-            background: var(--surface);
+            background: var(--black-surface);
             border-radius: var(--radius);
-            border: 1px solid var(--border);
+            border: 1px solid rgba(201,168,76,0.15);
             overflow: hidden;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
 
         .table-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
-            border-bottom: 1px solid var(--border);
+            padding: 20px 24px;
+            border-bottom: 1px solid rgba(201,168,76,0.2);
+            background: rgba(201,168,76,0.03);
         }
 
         .table-header h3 {
             font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gold-light);
         }
 
         .table-actions {
@@ -252,25 +371,43 @@
         }
 
         .btn {
-            padding: 8px 16px;
+            padding: 10px 18px;
             border-radius: 8px;
             border: none;
             cursor: pointer;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.85rem;
             transition: var(--transition);
             display: flex;
             align-items: center;
             gap: 6px;
             font-family: inherit;
+            letter-spacing: 0.3px;
         }
 
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-primary:hover { background: var(--primary-light); }
+        .btn-primary { 
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold)); 
+            color: var(--black); 
+            font-weight: 700;
+        }
+        .btn-primary:hover { 
+            box-shadow: var(--shadow-gold);
+            transform: translateY(-1px);
+        }
         .btn-success { background: var(--success); color: white; }
-        .btn-warning { background: var(--warning); color: #1a1a1a; }
+        .btn-success:hover { filter: brightness(1.1); }
+        .btn-warning { background: var(--warning); color: var(--black); font-weight: 700; }
         .btn-danger { background: var(--danger); color: white; }
-        .btn-outline { border: 1px solid var(--border); background: transparent; color: var(--text); }
+        .btn-danger:hover { filter: brightness(1.1); }
+        .btn-outline { 
+            border: 1px solid rgba(201,168,76,0.4); 
+            background: transparent; 
+            color: var(--gold-light);
+        }
+        .btn-outline:hover {
+            border-color: var(--gold);
+            background: rgba(201,168,76,0.1);
+        }
 
         .btn-sm { padding: 6px 12px; font-size: 0.8rem; }
 
@@ -281,42 +418,44 @@
 
         th {
             text-align: left;
-            padding: 12px 20px;
-            font-size: 0.8rem;
+            padding: 14px 24px;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--text-secondary);
-            border-bottom: 1px solid var(--border);
-            font-weight: 600;
+            letter-spacing: 1.5px;
+            color: var(--grey);
+            border-bottom: 1px solid rgba(201,168,76,0.2);
+            font-weight: 700;
         }
 
         td {
-            padding: 14px 20px;
-            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            border-bottom: 1px solid rgba(201,168,76,0.1);
             font-size: 0.9rem;
         }
 
         tr:hover {
-            background: var(--surface-light);
+            background: rgba(201,168,76,0.03);
         }
 
         .status-badge {
-            padding: 4px 10px;
+            padding: 5px 12px;
             border-radius: 20px;
             font-size: 0.75rem;
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
-        .status-pending { background: rgba(245,158,11,0.2); color: var(--warning); }
-        .status-approved { background: rgba(16,185,129,0.2); color: var(--success); }
-        .status-rejected { background: rgba(239,68,68,0.2); color: var(--danger); }
+        .status-pending { background: rgba(245,158,11,0.2); color: var(--warning); border: 1px solid rgba(245,158,11,0.3); }
+        .status-approved { background: rgba(16,185,129,0.2); color: var(--success); border: 1px solid rgba(16,185,129,0.3); }
+        .status-rejected { background: rgba(239,68,68,0.2); color: var(--danger); border: 1px solid rgba(239,68,68,0.3); }
+        .status-completed { background: rgba(16,185,129,0.2); color: var(--success); border: 1px solid rgba(16,185,129,0.3); }
 
         /* Modals */
         .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(4px);
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
             z-index: 1000;
             display: flex;
             align-items: center;
@@ -324,126 +463,175 @@
         }
 
         .modal {
-            background: var(--surface);
+            background: var(--black-surface);
             border-radius: var(--radius);
-            padding: 28px;
-            max-width: 560px;
+            padding: 32px;
+            max-width: 600px;
             width: 90%;
             max-height: 85vh;
             overflow-y: auto;
-            border: 1px solid var(--border);
-            animation: modalSlide 0.2s ease;
+            border: 1px solid rgba(201,168,76,0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(201,168,76,0.1);
+            animation: modalSlide 0.3s ease;
         }
 
         @keyframes modalSlide {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        .modal h2 { margin-bottom: 20px; font-size: 1.4rem; }
-        .modal h3 { margin: 16px 0 8px; color: var(--text-secondary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .modal h2 { 
+            margin-bottom: 24px; 
+            font-size: 1.6rem; 
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            letter-spacing: 0.5px;
+        }
+        .modal h3 { 
+            margin: 20px 0 10px; 
+            color: var(--grey-light); 
+            font-size: 0.85rem; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
 
-        .form-group { margin-bottom: 16px; }
-        .form-group label { display: block; margin-bottom: 6px; font-weight: 500; font-size: 0.9rem; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { 
+            display: block; 
+            margin-bottom: 8px; 
+            font-weight: 600; 
+            font-size: 0.9rem; 
+            color: var(--grey-light);
+            letter-spacing: 0.3px;
+        }
         .form-input, .form-select, .form-textarea {
             width: 100%;
-            padding: 10px 14px;
-            border: 1px solid var(--border);
+            padding: 12px 16px;
+            border: 1px solid rgba(201,168,76,0.3);
             border-radius: 8px;
-            background: var(--bg);
-            color: var(--text);
+            background: var(--black-light);
+            color: var(--white);
             font-family: inherit;
             font-size: 0.9rem;
+            transition: var(--transition);
         }
 
         .form-input:focus, .form-select:focus, .form-textarea:focus {
             outline: none;
-            border-color: var(--primary);
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
         }
 
         .price-adjust {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             align-items: center;
         }
 
         .price-adjust input {
-            width: 120px;
+            width: 140px;
         }
 
         .price-suggestion {
             font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-top: 4px;
+            color: var(--gold-light);
+            margin-top: 6px;
+            font-weight: 500;
         }
 
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            gap: 20px;
         }
 
         .activity-log {
-            max-height: 400px;
+            max-height: 450px;
             overflow-y: auto;
         }
 
         .activity-item {
             display: flex;
-            gap: 12px;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border);
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(201,168,76,0.1);
             font-size: 0.85rem;
+            align-items: center;
         }
 
         .activity-icon {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+            flex-shrink: 0;
         }
 
         .activity-time {
-            color: var(--text-secondary);
+            color: var(--grey);
             font-size: 0.75rem;
+            margin-top: 4px;
         }
 
         .search-box {
             display: flex;
             align-items: center;
-            background: var(--bg);
-            border: 1px solid var(--border);
+            background: var(--black-light);
+            border: 1px solid rgba(201,168,76,0.3);
             border-radius: 8px;
-            padding: 0 12px;
+            padding: 0 14px;
+            transition: var(--transition);
+        }
+
+        .search-box:focus-within {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
         }
 
         .search-box input {
             border: none;
             background: transparent;
-            color: var(--text);
-            padding: 8px;
+            color: var(--white);
+            padding: 10px;
             flex: 1;
             outline: none;
+            font-family: inherit;
         }
 
         .empty-state {
             text-align: center;
-            padding: 40px;
-            color: var(--text-secondary);
+            padding: 50px;
+            color: var(--grey);
         }
 
         .empty-state i {
-            font-size: 3rem;
-            margin-bottom: 12px;
+            font-size: 3.5rem;
+            margin-bottom: 16px;
+            color: var(--gold-dark);
+        }
+
+        .confirmation-code {
+            font-family: 'Courier New', monospace;
+            background: var(--black-light);
+            padding: 10px 16px;
+            border-radius: 8px;
+            color: var(--gold);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-align: center;
+            border: 1px solid rgba(201,168,76,0.3);
+            font-weight: 700;
         }
 
         @media (max-width: 768px) {
-            .sidebar { width: 200px; }
-            .main-content { margin-left: 200px; padding: 20px; }
+            .sidebar { width: 220px; }
+            .main-content { margin-left: 220px; padding: 20px; }
             .stats-grid { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -454,7 +642,14 @@
     <aside class="sidebar">
         <div class="sidebar-logo">
             <h1>SecondChance</h1>
-            <span>Admin Control Panel</span>
+            <span>Master Control Panel</span>
+        </div>
+
+        <!-- Master Account Info -->
+        <div class="master-account">
+            <div class="master-account-label">👑 Master Account</div>
+            <div class="master-account-number">0792091769</div>
+            <div class="master-account-balance" id="masterBalance">KSH 0</div>
         </div>
 
         <div class="nav-section">
@@ -498,18 +693,22 @@
 
     <!-- Main Content -->
     <main class="main-content" id="mainContent">
-        <!-- Dashboard View (default) -->
         <div id="dashboardView">
             <div class="top-bar">
                 <h2>📊 Dashboard Overview</h2>
-                <div class="admin-profile">
-                    <div class="admin-avatar">A</div>
-                    <span>Admin User</span>
+                <div style="display:flex;align-items:center;gap:20px;">
+                    <div class="sync-status">
+                        <span class="sync-dot"></span>
+                        Live Sync Active
+                    </div>
+                    <div class="admin-profile">
+                        <div class="admin-avatar">SC</div>
+                        <span style="font-weight:600;">Master Admin</span>
+                    </div>
                 </div>
             </div>
 
             <div class="stats-grid" id="statsGrid"></div>
-
             <div class="table-container">
                 <div class="table-header">
                     <h3>Recent Activity</h3>
@@ -518,182 +717,21 @@
             </div>
         </div>
 
-        <!-- Products View -->
-        <div id="productsView" style="display:none;">
-            <div class="top-bar">
-                <h2>📦 Product Management</h2>
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search products..." oninput="filterProducts(this.value)">
-                </div>
-            </div>
-            <div class="table-container">
-                <div class="table-header">
-                    <h3>All Products</h3>
-                    <div class="table-actions">
-                        <button class="btn btn-outline btn-sm" onclick="filterProductStatus('all')">All</button>
-                        <button class="btn btn-warning btn-sm" onclick="filterProductStatus('pending')">Pending</button>
-                        <button class="btn btn-success btn-sm" onclick="filterProductStatus('approved')">Approved</button>
-                        <button class="btn btn-danger btn-sm" onclick="filterProductStatus('rejected')">Rejected</button>
-                    </div>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th>Seller</th>
-                            <th>Price</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="productsTableBody"></tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Payments View -->
-        <div id="paymentsView" style="display:none;">
-            <div class="top-bar">
-                <h2>💳 Payment Verification</h2>
-            </div>
-            <div class="table-container">
-                <div class="table-header">
-                    <h3>Registration Fee Payments</h3>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>User</th>
-                            <th>Amount</th>
-                            <th>Method</th>
-                            <th>Transaction Code</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="paymentsTableBody"></tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Users View -->
-        <div id="usersView" style="display:none;">
-            <div class="top-bar">
-                <h2>👥 User Management</h2>
-            </div>
-            <div class="table-container">
-                <div class="table-header">
-                    <h3>All Users</h3>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>User</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Seller Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="usersTableBody"></tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Orders View -->
-        <div id="ordersView" style="display:none;">
-            <div class="top-bar">
-                <h2>🛒 Order Monitoring</h2>
-            </div>
-            <div class="table-container">
-                <div class="table-header">
-                    <h3>All Orders</h3>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Buyer</th>
-                            <th>Seller</th>
-                            <th>Items</th>
-                            <th>Total</th>
-                            <th>Commission</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody id="ordersTableBody"></tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Commissions View -->
-        <div id="commissionsView" style="display:none;">
-            <div class="top-bar">
-                <h2>💰 Commission Management</h2>
-            </div>
-            <div class="stats-grid" id="commissionStats"></div>
-            <div class="table-container">
-                <div class="table-header">
-                    <h3>Commission Rates (Adjustable)</h3>
-                </div>
-                <div style="padding:20px;">
-                    <div class="grid-2">
-                        <div class="form-group">
-                            <label>Below KSH 10,000 (%)</label>
-                            <input type="number" class="form-input" id="lowCommission" value="3" min="0" max="50" step="0.5">
-                        </div>
-                        <div class="form-group">
-                            <label>KSH 10,000 and Above (%)</label>
-                            <input type="number" class="form-input" id="highCommission" value="5" min="0" max="50" step="0.5">
-                        </div>
-                    </div>
-                    <button class="btn btn-primary" onclick="saveCommissionRates()">Save Rates</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Settings View -->
-        <div id="settingsView" style="display:none;">
-            <div class="top-bar">
-                <h2>⚙️ Platform Settings</h2>
-            </div>
-            <div class="table-container">
-                <div style="padding:20px;">
-                    <div class="form-group">
-                        <label>Registration Fee (KSH)</label>
-                        <input type="number" class="form-input" id="regFee" value="350" min="0">
-                    </div>
-                    <div class="form-group">
-                        <label>Platform Status</label>
-                        <select class="form-select" id="platformStatus">
-                            <option value="active">Active</option>
-                            <option value="maintenance">Maintenance Mode</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Activity View -->
-        <div id="activityView" style="display:none;">
-            <div class="top-bar">
-                <h2>📜 Activity Log</h2>
-                <button class="btn btn-outline btn-sm" onclick="clearActivityLog()">Clear Log</button>
-            </div>
-            <div class="table-container">
-                <div class="activity-log" id="fullActivityLog"></div>
-            </div>
-        </div>
+        <!-- Other views (same structure, shown/hidden via JS) -->
+        <div id="productsView" style="display:none;"></div>
+        <div id="paymentsView" style="display:none;"></div>
+        <div id="usersView" style="display:none;"></div>
+        <div id="ordersView" style="display:none;"></div>
+        <div id="commissionsView" style="display:none;"></div>
+        <div id="settingsView" style="display:none;"></div>
+        <div id="activityView" style="display:none;"></div>
     </main>
 </div>
 
 <!-- Price Adjustment Modal -->
 <div class="modal-overlay" id="priceModal" style="display:none;">
     <div class="modal">
-        <h2>Adjust Product Price</h2>
+        <h2>💰 Adjust Product Price</h2>
         <div class="form-group">
             <label>Current Price</label>
             <input type="text" class="form-input" id="currentPriceDisplay" disabled>
@@ -702,114 +740,165 @@
             <label>New Price (KSH)</label>
             <div class="price-adjust">
                 <input type="number" class="form-input" id="newPrice" min="0">
-                <button class="btn btn-warning" onclick="suggestMarketPrice()">Suggest Market Price</button>
+                <button class="btn btn-warning" onclick="suggestMarketPrice()">📊 Suggest Market Price</button>
             </div>
             <div class="price-suggestion" id="priceSuggestion"></div>
         </div>
         <div class="form-group">
             <label>Reason for Adjustment</label>
-            <textarea class="form-textarea" id="priceReason" placeholder="Explain why the price needs adjustment..."></textarea>
+            <textarea class="form-textarea" id="priceReason" placeholder="Explain why the price needs adjustment..." rows="3"></textarea>
         </div>
-        <button class="btn btn-primary" onclick="savePriceAdjustment()">Save Adjustment</button>
+        <button class="btn btn-primary" onclick="savePriceAdjustment()">💾 Save & Sync</button>
         <button class="btn btn-outline" onclick="closePriceModal()">Cancel</button>
     </div>
 </div>
 
-<script>
-    // ==================== DATA STORE ====================
-    // In production, this would come from your backend API
-    let adminData = JSON.parse(localStorage.getItem('adminData')) || initializeAdminData();
+<!-- Confirmation Code Modal -->
+<div class="modal-overlay" id="confirmModal" style="display:none;">
+    <div class="modal">
+        <h2>✅ Generate Confirmation Code</h2>
+        <p style="margin-bottom:16px;">This code will be sent to the user to confirm their registration.</p>
+        <div class="confirmation-code" id="generatedCode"></div>
+        <p style="margin-top:8px;color:var(--grey-light);font-size:0.85rem;">Code expires in 24 hours</p>
+        <button class="btn btn-primary" onclick="copyAndConfirm()" style="margin-top:16px;">📋 Copy & Confirm Payment</button>
+        <button class="btn btn-outline" onclick="document.getElementById('confirmModal').style.display='none'">Close</button>
+    </div>
+</div>
 
-    function initializeAdminData() {
-        const data = {
+<script>
+    // ==================== MASTER ACCOUNT CONFIGURATION ====================
+    const MASTER_ACCOUNT = {
+        phone: '0792091769',
+        name: 'Master Admin',
+        balance: 0
+    };
+
+    // ==================== DATA STORE WITH SYNC ====================
+    let adminData = loadAdminData();
+
+    function loadAdminData() {
+        const saved = localStorage.getItem('secondchance_admin_data');
+        if (saved) {
+            try { return JSON.parse(saved); } catch(e) {}
+        }
+        return initializeFreshData();
+    }
+
+    function initializeFreshData() {
+        return {
             products: [
-                { id: 1, title: 'Samsung Fridge 200L', category: 'kitchen', price: 45000, condition: 'good', seller: 'Jane Doe', status: 'approved', listedDate: '2024-01-15' },
-                { id: 2, title: 'Non-stick Pan Set', category: 'kitchen', price: 2500, condition: 'like-new', seller: 'Mike Smith', status: 'approved', listedDate: '2024-01-16' },
-                { id: 3, title: 'iPhone 13 Pro', category: 'electronics', price: 85000, condition: 'good', seller: 'Tech Guru', status: 'pending', listedDate: '2024-01-17' },
-                { id: 4, title: 'Leather Sofa Set', category: 'furniture', price: 35000, condition: 'fair', seller: 'Home Decor', status: 'pending', listedDate: '2024-01-18' },
-                { id: 5, title: 'Evening Gown', category: 'fashion', price: 8000, condition: 'like-new', seller: 'Fashionista', status: 'approved', listedDate: '2024-01-14' },
-                { id: 6, title: 'Alloy Rims 17"', category: 'automotive', price: 15000, condition: 'good', seller: 'Car Parts', status: 'rejected', listedDate: '2024-01-13' },
-                { id: 7, title: 'Overpriced Watch', category: 'fashion', price: 500000, condition: 'new', seller: 'Luxury Seller', status: 'pending', listedDate: '2024-01-19' },
-                { id: 8, title: 'Old Textbook', category: 'books', price: 100, condition: 'poor', seller: 'Student', status: 'pending', listedDate: '2024-01-19' }
+                { id: 1, title: 'Samsung Double Door Fridge', category: 'kitchen', price: 45000, condition: 'good', seller: 'Jane Home', status: 'approved', listedDate: '2024-01-15' },
+                { id: 2, title: 'Premium Cookware Set', category: 'kitchen', price: 8500, condition: 'like-new', seller: 'Mike Chef', status: 'approved', listedDate: '2024-01-16' },
+                { id: 3, title: 'iPhone 13 Pro Max 256GB', category: 'electronics', price: 95000, condition: 'good', seller: 'Tech Seller', status: 'pending', listedDate: '2024-01-18' },
+                { id: 4, title: 'Italian Leather Sofa', category: 'furniture', price: 65000, condition: 'fair', seller: 'Luxury Home', status: 'pending', listedDate: '2024-01-19' },
+                { id: 5, title: 'Designer Silk Dress', category: 'fashion', price: 12000, condition: 'like-new', seller: 'Fashion Hub', status: 'approved', listedDate: '2024-01-14' },
+                { id: 6, title: 'Premium Alloy Wheels', category: 'automotive', price: 28000, condition: 'good', seller: 'Auto Parts KE', status: 'rejected', listedDate: '2024-01-13' },
+                { id: 7, title: 'Vintage Luxury Watch', category: 'fashion', price: 350000, condition: 'new', seller: 'Timepiece KE', status: 'pending', listedDate: '2024-01-20' },
+                { id: 8, title: 'University Textbooks Bundle', category: 'books', price: 3500, condition: 'good', seller: 'Campus Books', status: 'pending', listedDate: '2024-01-20' }
             ],
-            payments: [
-                { id: 1, userId: 101, userName: 'Jane Doe', amount: 350, method: 'mpesa', code: 'QWE1234567', date: '2024-01-15', status: 'pending' },
-                { id: 2, userId: 102, userName: 'Mike Smith', amount: 350, method: 'bank', code: 'BANK98765', date: '2024-01-16', status: 'pending' },
-                { id: 3, userId: 103, userName: 'Tech Guru', amount: 350, method: 'mpesa', code: 'MPS456789', date: '2024-01-17', status: 'pending' },
-                { id: 4, userId: 104, userName: 'New Seller', amount: 350, method: 'card', code: 'CARD12345', date: '2024-01-20', status: 'pending' }
-            ],
-            users: [
-                { id: 101, name: 'Jane Doe', email: 'jane@email.com', role: 'seller', sellerStatus: 'approved', registrationDate: '2024-01-15' },
-                { id: 102, name: 'Mike Smith', email: 'mike@email.com', role: 'seller', sellerStatus: 'approved', registrationDate: '2024-01-16' },
-                { id: 103, name: 'Tech Guru', email: 'tech@email.com', role: 'user', sellerStatus: 'pending', registrationDate: null },
-                { id: 104, name: 'New Seller', email: 'new@email.com', role: 'user', sellerStatus: 'pending', registrationDate: null }
-            ],
-            orders: [
-                { id: 1001, buyer: 'John Buyer', seller: 'Jane Doe', items: ['Samsung Fridge'], total: 45000, commission: 2250, date: '2024-01-17' },
-                { id: 1002, buyer: 'Alice Customer', seller: 'Mike Smith', items: ['Pan Set'], total: 2500, commission: 75, date: '2024-01-18' }
-            ],
-            activityLog: [
-                { type: 'product_approved', message: 'Product "Samsung Fridge" approved', time: '2024-01-15 14:30' },
-                { type: 'payment_verified', message: 'Payment verified for Jane Doe', time: '2024-01-15 14:25' },
-                { type: 'user_registered', message: 'New user Mike Smith registered', time: '2024-01-16 10:15' }
-            ],
+            payments: [],
+            users: [],
+            orders: [],
+            activityLog: [],
             settings: {
                 registrationFee: 350,
                 lowCommission: 3,
                 highCommission: 5,
-                platformStatus: 'active'
+                platformStatus: 'active',
+                masterAccount: '0792091769'
             },
             currentPriceEdit: null
         };
-        saveAdminData(data);
-        return data;
     }
 
-    function saveAdminData(data) {
-        localStorage.setItem('adminData', JSON.stringify(data));
+    function saveAdminData() {
+        localStorage.setItem('secondchance_admin_data', JSON.stringify(adminData));
+        syncToMainApp();
+        updateMasterBalance();
+    }
+
+    // ==================== CROSS-APP SYNCHRONIZATION ====================
+    function syncToMainApp() {
+        const syncData = {
+            approvedProducts: adminData.products.filter(p => p.status === 'approved'),
+            verifiedPayments: adminData.payments.filter(p => p.status === 'completed'),
+            approvedSellers: adminData.users.filter(u => u.sellerStatus === 'approved'),
+            settings: adminData.settings,
+            lastSync: new Date().toISOString(),
+            masterAccount: MASTER_ACCOUNT.phone
+        };
+        localStorage.setItem('secondchance_sync_data', JSON.stringify(syncData));
+    }
+
+    function pullFromMainApp() {
+        const mainData = localStorage.getItem('secondchance_main_data');
+        if (mainData) {
+            try {
+                const parsed = JSON.parse(mainData);
+                if (parsed.newPayments) {
+                    parsed.newPayments.forEach(p => {
+                        if (!adminData.payments.find(ap => ap.code === p.code)) {
+                            adminData.payments.push({...p, status: 'pending'});
+                        }
+                    });
+                }
+                if (parsed.newUsers) {
+                    parsed.newUsers.forEach(u => {
+                        if (!adminData.users.find(au => au.phone === u.phone)) {
+                            adminData.users.push({...u, sellerStatus: 'pending'});
+                        }
+                    });
+                }
+            } catch(e) {}
+        }
+    }
+
+    function updateMasterBalance() {
+        const totalFees = adminData.payments
+            .filter(p => p.status === 'completed')
+            .reduce((sum, p) => sum + p.amount, 0);
+        const totalCommissions = adminData.orders.reduce((sum, o) => sum + o.commission, 0);
+        MASTER_ACCOUNT.balance = totalFees + totalCommissions;
+        document.getElementById('masterBalance').textContent = `KSH ${MASTER_ACCOUNT.balance.toLocaleString()}`;
+    }
+
+    function generateConfirmationCode() {
+        const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        let code = 'SC-';
+        for (let i = 0; i < 8; i++) {
+            code += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return code;
     }
 
     // ==================== NAVIGATION ====================
     function navigateTo(view) {
-        // Hide all views
-        ['dashboardView', 'productsView', 'paymentsView', 'usersView', 'ordersView', 'commissionsView', 'settingsView', 'activityView'].forEach(v => {
-            document.getElementById(v).style.display = 'none';
+        const views = ['dashboard', 'products', 'payments', 'users', 'orders', 'commissions', 'settings', 'activity'];
+        views.forEach(v => {
+            const el = document.getElementById(v + 'View');
+            if (el) el.style.display = 'none';
         });
         
-        // Show selected view
-        const viewMap = {
-            'dashboard': 'dashboardView',
-            'products': 'productsView',
-            'payments': 'paymentsView',
-            'users': 'usersView',
-            'orders': 'ordersView',
-            'commissions': 'commissionsView',
-            'settings': 'settingsView',
-            'activity': 'activityView'
-        };
+        const targetView = document.getElementById(view + 'View');
+        if (targetView) targetView.style.display = 'block';
         
-        if (viewMap[view]) {
-            document.getElementById(viewMap[view]).style.display = 'block';
-        }
-        
-        // Update active nav item
         document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-        event.target.closest('.nav-item')?.classList.add('active');
+        const clickedNav = document.querySelector(`.nav-item[onclick*="${view}"]`);
+        if (clickedNav) clickedNav.classList.add('active');
         
-        // Load data for the view
-        loadViewData(view);
+        loadViewContent(view);
     }
 
-    function loadViewData(view) {
+    function loadViewContent(view) {
         switch(view) {
             case 'dashboard': loadDashboard(); break;
-            case 'products': loadProducts(); break;
-            case 'payments': loadPayments(); break;
-            case 'users': loadUsers(); break;
-            case 'orders': loadOrders(); break;
-            case 'commissions': loadCommissions(); break;
-            case 'settings': loadSettings(); break;
-            case 'activity': loadActivity(); break;
+            case 'products': loadProductsView(); break;
+            case 'payments': loadPaymentsView(); break;
+            case 'users': loadUsersView(); break;
+            case 'orders': loadOrdersView(); break;
+            case 'commissions': loadCommissionsView(); break;
+            case 'settings': loadSettingsView(); break;
+            case 'activity': loadActivityView(); break;
         }
     }
 
@@ -817,14 +906,15 @@
     function loadDashboard() {
         const pendingProducts = adminData.products.filter(p => p.status === 'pending').length;
         const pendingPayments = adminData.payments.filter(p => p.status === 'pending').length;
-        const totalRevenue = adminData.orders.reduce((sum, o) => sum + o.commission, 0);
-        const totalUsers = adminData.users.length;
+        const totalRevenue = adminData.orders.reduce((sum, o) => sum + o.commission, 0) + 
+                             adminData.payments.filter(p => p.status === 'completed').reduce((sum, p) => sum + p.amount, 0);
+        const approvedSellers = adminData.users.filter(u => u.sellerStatus === 'approved').length;
 
         document.getElementById('statsGrid').innerHTML = `
             <div class="stat-card">
                 <div class="stat-header">
                     <span class="stat-icon">📦</span>
-                    <span class="stat-change change-up">Pending: ${pendingProducts}</span>
+                    <span class="stat-change change-up">${pendingProducts} pending</span>
                 </div>
                 <div class="stat-value">${adminData.products.length}</div>
                 <div class="stat-label">Total Products</div>
@@ -832,7 +922,7 @@
             <div class="stat-card">
                 <div class="stat-header">
                     <span class="stat-icon">💳</span>
-                    <span class="stat-change ${pendingPayments > 0 ? 'change-down' : 'change-up'}">Pending: ${pendingPayments}</span>
+                    <span class="stat-change ${pendingPayments > 0 ? 'change-down' : 'change-up'}">${pendingPayments} pending</span>
                 </div>
                 <div class="stat-value">${adminData.payments.length}</div>
                 <div class="stat-label">Payment Requests</div>
@@ -840,21 +930,22 @@
             <div class="stat-card">
                 <div class="stat-header">
                     <span class="stat-icon">💰</span>
-                    <span class="stat-change change-up">+${totalRevenue} KSH</span>
+                    <span class="stat-change change-up">Master: 0792091769</span>
                 </div>
                 <div class="stat-value">KSH ${totalRevenue.toLocaleString()}</div>
-                <div class="stat-label">Total Commission Revenue</div>
+                <div class="stat-label">Total Revenue</div>
             </div>
             <div class="stat-card">
                 <div class="stat-header">
                     <span class="stat-icon">👥</span>
+                    <span class="stat-change change-up">${approvedSellers} sellers</span>
                 </div>
-                <div class="stat-value">${totalUsers}</div>
+                <div class="stat-value">${adminData.users.length}</div>
                 <div class="stat-label">Registered Users</div>
             </div>
         `;
 
-        document.getElementById('recentActivity').innerHTML = adminData.activityLog.slice(-5).reverse().map(log => `
+        document.getElementById('recentActivity').innerHTML = adminData.activityLog.slice(-8).reverse().map(log => `
             <div class="activity-item">
                 <div class="activity-icon" style="background:${getActivityColor(log.type)}">${getActivityIcon(log.type)}</div>
                 <div>
@@ -862,48 +953,101 @@
                     <div class="activity-time">${log.time}</div>
                 </div>
             </div>
-        `).join('') || '<div class="empty-state">No recent activity</div>';
+        `).join('') || '<div class="empty-state"><i class="fas fa-history"></i><p>No activity recorded yet</p></div>';
 
-        updateBadges();
+        updateAllBadges();
+        updateMasterBalance();
     }
 
     function getActivityColor(type) {
-        const colors = { product_approved: 'rgba(16,185,129,0.3)', payment_verified: 'rgba(59,130,246,0.3)', user_registered: 'rgba(139,92,246,0.3)' };
-        return colors[type] || 'rgba(100,116,139,0.3)';
+        const colors = {
+            product_approved: 'rgba(16,185,129,0.3)',
+            payment_verified: 'rgba(201,168,76,0.3)',
+            payment_confirmed: 'rgba(201,168,76,0.4)',
+            user_registered: 'rgba(59,130,246,0.3)',
+            price_adjusted: 'rgba(245,158,11,0.3)',
+            commission_updated: 'rgba(139,92,246,0.3)'
+        };
+        return colors[log.type] || 'rgba(107,114,128,0.3)';
     }
 
     function getActivityIcon(type) {
-        const icons = { product_approved: '✓', payment_verified: '$', user_registered: '👤' };
+        const icons = {
+            product_approved: '✓', payment_verified: '$', payment_confirmed: '🔐',
+            user_registered: '👤', price_adjusted: '💰', commission_updated: '📊'
+        };
         return icons[type] || '•';
     }
 
     function addActivity(type, message) {
         adminData.activityLog.unshift({ type, message, time: new Date().toLocaleString() });
-        saveAdminData(adminData);
+        saveAdminData();
     }
 
-    // ==================== PRODUCTS ====================
-    let productFilter = 'all';
-
-    function loadProducts(filterStatus = productFilter) {
-        productFilter = filterStatus;
+    // ==================== PRODUCTS VIEW ====================
+    function loadProductsView(filterStatus = 'all') {
+        const productsView = document.getElementById('productsView');
         const filtered = filterStatus === 'all' ? adminData.products : adminData.products.filter(p => p.status === filterStatus);
         
+        productsView.innerHTML = `
+            <div class="top-bar">
+                <h2>📦 Product Management</h2>
+                <div class="search-box">
+                    <i class="fas fa-search" style="color:var(--gold);"></i>
+                    <input type="text" placeholder="Search products..." oninput="filterProductsSearch(this.value)">
+                </div>
+            </div>
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>All Products</h3>
+                    <div class="table-actions">
+                        <button class="btn btn-outline btn-sm" onclick="loadProductsView('all')">All</button>
+                        <button class="btn btn-warning btn-sm" onclick="loadProductsView('pending')">Pending</button>
+                        <button class="btn btn-success btn-sm" onclick="loadProductsView('approved')">Approved</button>
+                        <button class="btn btn-danger btn-sm" onclick="loadProductsView('rejected')">Rejected</button>
+                    </div>
+                </div>
+                <table>
+                    <thead><tr><th>Product</th><th>Seller</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
+                    <tbody id="productsTableBody">
+                        ${filtered.map(p => `
+                            <tr>
+                                <td><strong>${p.title}</strong><br><small style="color:var(--grey-light);">${p.category} • ${p.condition}</small></td>
+                                <td>${p.seller}</td>
+                                <td><strong style="color:var(--gold);">KSH ${p.price.toLocaleString()}</strong></td>
+                                <td><span class="status-badge status-${p.status}">${p.status.toUpperCase()}</span></td>
+                                <td>
+                                    <button class="btn btn-success btn-sm" onclick="approveProduct(${p.id})" title="Approve">✓</button>
+                                    <button class="btn btn-danger btn-sm" onclick="rejectProduct(${p.id})" title="Reject">✕</button>
+                                    <button class="btn btn-warning btn-sm" onclick="openPriceModal(${p.id})" title="Adjust Price">💲</button>
+                                </td>
+                            </tr>
+                        `).join('') || '<tr><td colspan="5" class="empty-state">No products found</td></tr>'}
+                    </tbody>
+                </table>
+            </div>
+        `;
+    }
+
+    function filterProductsSearch(search) {
+        const term = search.toLowerCase();
+        const filtered = adminData.products.filter(p => 
+            p.title.toLowerCase().includes(term) || 
+            p.seller.toLowerCase().includes(term)
+        );
         document.getElementById('productsTableBody').innerHTML = filtered.map(p => `
             <tr>
-                <td><strong>${p.title}</strong><br><small>${p.category} • ${p.condition}</small></td>
+                <td><strong>${p.title}</strong><br><small style="color:var(--grey-light);">${p.category} • ${p.condition}</small></td>
                 <td>${p.seller}</td>
-                <td><strong>KSH ${p.price.toLocaleString()}</strong></td>
-                <td><span class="status-badge status-${p.status}">${p.status}</span></td>
+                <td><strong style="color:var(--gold);">KSH ${p.price.toLocaleString()}</strong></td>
+                <td><span class="status-badge status-${p.status}">${p.status.toUpperCase()}</span></td>
                 <td>
                     <button class="btn btn-success btn-sm" onclick="approveProduct(${p.id})">✓</button>
                     <button class="btn btn-danger btn-sm" onclick="rejectProduct(${p.id})">✕</button>
                     <button class="btn btn-warning btn-sm" onclick="openPriceModal(${p.id})">💲</button>
                 </td>
             </tr>
-        `).join('');
-
-        updateBadges();
+        `).join('') || '<tr><td colspan="5" class="empty-state">No products found</td></tr>';
     }
 
     function approveProduct(id) {
@@ -911,8 +1055,8 @@
         if (product) {
             product.status = 'approved';
             addActivity('product_approved', `Product "${product.title}" approved`);
-            saveAdminData(adminData);
-            loadProducts();
+            saveAdminData();
+            loadProductsView();
             loadDashboard();
         }
     }
@@ -924,35 +1068,9 @@
         if (product) {
             product.status = 'rejected';
             addActivity('product_rejected', `Product "${product.title}" rejected: ${reason}`);
-            saveAdminData(adminData);
-            loadProducts();
+            saveAdminData();
+            loadProductsView();
         }
-    }
-
-    function filterProducts(search) {
-        const term = search.toLowerCase();
-        const filtered = adminData.products.filter(p => 
-            p.title.toLowerCase().includes(term) || 
-            p.seller.toLowerCase().includes(term) ||
-            p.category.toLowerCase().includes(term)
-        );
-        document.getElementById('productsTableBody').innerHTML = filtered.map(p => `
-            <tr>
-                <td><strong>${p.title}</strong><br><small>${p.category} • ${p.condition}</small></td>
-                <td>${p.seller}</td>
-                <td><strong>KSH ${p.price.toLocaleString()}</strong></td>
-                <td><span class="status-badge status-${p.status}">${p.status}</span></td>
-                <td>
-                    <button class="btn btn-success btn-sm" onclick="approveProduct(${p.id})">✓</button>
-                    <button class="btn btn-danger btn-sm" onclick="rejectProduct(${p.id})">✕</button>
-                    <button class="btn btn-warning btn-sm" onclick="openPriceModal(${p.id})">💲</button>
-                </td>
-            </tr>
-        `).join('');
-    }
-
-    function filterProductStatus(status) {
-        loadProducts(status);
     }
 
     // ==================== PRICE ADJUSTMENT ====================
@@ -977,7 +1095,6 @@
         const product = adminData.products.find(p => p.id === adminData.currentPriceEdit);
         if (!product) return;
         
-        // Simple market price suggestion based on category averages
         const categoryProducts = adminData.products.filter(p => p.category === product.category && p.id !== product.id);
         const avgPrice = categoryProducts.length > 0 
             ? categoryProducts.reduce((sum, p) => sum + p.price, 0) / categoryProducts.length 
@@ -986,8 +1103,8 @@
         const suggestedPrice = Math.round(avgPrice / 100) * 100;
         document.getElementById('newPrice').value = suggestedPrice;
         document.getElementById('priceSuggestion').innerHTML = `
-            💡 Suggested market price: <strong>KSH ${suggestedPrice.toLocaleString()}</strong> 
-            (based on ${categoryProducts.length} similar items in ${product.category})
+            💡 <strong>Market Price Suggestion:</strong> KSH ${suggestedPrice.toLocaleString()} 
+            (Average of ${categoryProducts.length} similar items in ${product.category})
         `;
     }
 
@@ -1002,57 +1119,136 @@
         if (product) {
             const oldPrice = product.price;
             product.price = newPrice;
-            addActivity('price_adjusted', `Price adjusted for "${product.title}" from KSH ${oldPrice} to KSH ${newPrice}: ${reason || 'No reason provided'}`);
-            saveAdminData(adminData);
+            addActivity('price_adjusted', `Price adjusted: "${product.title}" KSH ${oldPrice.toLocaleString()} → KSH ${newPrice.toLocaleString()}`);
+            saveAdminData();
             closePriceModal();
-            loadProducts();
+            loadProductsView();
             loadDashboard();
-            alert(`Price adjusted successfully!\nOld: KSH ${oldPrice.toLocaleString()}\nNew: KSH ${newPrice.toLocaleString()}`);
         }
     }
 
-    // ==================== PAYMENTS ====================
-    function loadPayments() {
-        document.getElementById('paymentsTableBody').innerHTML = adminData.payments.map(p => `
-            <tr>
-                <td><strong>${p.userName}</strong></td>
-                <td>KSH ${p.amount}</td>
-                <td>${p.method.toUpperCase()}</td>
-                <td><code>${p.code}</code></td>
-                <td>${p.date}</td>
-                <td><span class="status-badge status-${p.status}">${p.status}</span></td>
-                <td>
-                    ${p.status === 'pending' ? `
-                        <button class="btn btn-success btn-sm" onclick="verifyPayment(${p.id})">✓ Verify</button>
-                        <button class="btn btn-danger btn-sm" onclick="rejectPayment(${p.id})">✕ Reject</button>
-                    ` : '—'}
-                </td>
-            </tr>
-        `).join('') || '<tr><td colspan="7" class="empty-state">No payments to display</td></tr>';
-
-        updateBadges();
+    // ==================== PAYMENTS VIEW ====================
+    function loadPaymentsView() {
+        const paymentsView = document.getElementById('paymentsView');
+        paymentsView.innerHTML = `
+            <div class="top-bar">
+                <h2>💳 Payment Verification</h2>
+            </div>
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>Registration Fee Payments</h3>
+                    <div class="table-actions">
+                        <button class="btn btn-outline btn-sm" onclick="loadPaymentsView()">All</button>
+                        <button class="btn btn-warning btn-sm" onclick="filterPayments('pending')">Pending</button>
+                        <button class="btn btn-success btn-sm" onclick="filterPayments('completed')">Completed</button>
+                    </div>
+                </div>
+                <table>
+                    <thead><tr><th>User</th><th>Phone</th><th>Amount</th><th>Method</th><th>Code</th><th>Status</th><th>Actions</th></tr></thead>
+                    <tbody id="paymentsTableBody">
+                        ${adminData.payments.length === 0 ? '<tr><td colspan="7" class="empty-state"><i class="fas fa-money-bill-wave"></i><p>No payments yet. Users will appear here after submitting registration fees.</p></td></tr>' :
+                        adminData.payments.map(p => `
+                            <tr>
+                                <td><strong>${p.userName}</strong></td>
+                                <td>${p.phone || '—'}</td>
+                                <td style="color:var(--gold);font-weight:600;">KSH ${p.amount}</td>
+                                <td>${p.method?.toUpperCase() || '—'}</td>
+                                <td><code style="color:var(--gold-light);">${p.code}</code></td>
+                                <td><span class="status-badge status-${p.status}">${p.status.toUpperCase()}</span></td>
+                                <td>
+                                    ${p.status === 'pending' ? `
+                                        <button class="btn btn-primary btn-sm" onclick="verifyWithConfirmation(${p.id})">🔐 Verify & Send Code</button>
+                                        <button class="btn btn-danger btn-sm" onclick="rejectPayment(${p.id})">✕</button>
+                                    ` : '<span style="color:var(--grey-light);">Completed</span>'}
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `;
     }
 
-    function verifyPayment(paymentId) {
+    function filterPayments(status) {
+        const filtered = status === 'all' ? adminData.payments : adminData.payments.filter(p => p.status === status);
+        document.getElementById('paymentsTableBody').innerHTML = filtered.map(p => `
+            <tr>
+                <td><strong>${p.userName}</strong></td>
+                <td>${p.phone || '—'}</td>
+                <td style="color:var(--gold);font-weight:600;">KSH ${p.amount}</td>
+                <td>${p.method?.toUpperCase() || '—'}</td>
+                <td><code style="color:var(--gold-light);">${p.code}</code></td>
+                <td><span class="status-badge status-${p.status}">${p.status.toUpperCase()}</span></td>
+                <td>
+                    ${p.status === 'pending' ? `
+                        <button class="btn btn-primary btn-sm" onclick="verifyWithConfirmation(${p.id})">🔐 Verify & Send Code</button>
+                    ` : '<span style="color:var(--grey-light);">Completed</span>'}
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    // ==================== CONFIRMATION CODE SYSTEM ====================
+    let currentPaymentToVerify = null;
+
+    function verifyWithConfirmation(paymentId) {
         const payment = adminData.payments.find(p => p.id === paymentId);
         if (!payment) return;
         
-        payment.status = 'completed';
+        currentPaymentToVerify = paymentId;
+        const code = generateConfirmationCode();
+        document.getElementById('generatedCode').textContent = code;
+        document.getElementById('confirmModal').style.display = 'flex';
+    }
+
+    function copyAndConfirm() {
+        if (!currentPaymentToVerify) return;
         
-        // Update user's seller status
-        const user = adminData.users.find(u => u.id === payment.userId);
-        if (user) {
+        const payment = adminData.payments.find(p => p.id === currentPaymentToVerify);
+        if (!payment) return;
+        
+        const code = document.getElementById('generatedCode').textContent;
+        
+        // Copy to clipboard
+        navigator.clipboard.writeText(code).catch(() => {});
+        
+        // Update payment
+        payment.status = 'completed';
+        payment.confirmationCode = code;
+        payment.verifiedAt = new Date().toISOString();
+        payment.receivedBy = MASTER_ACCOUNT.phone;
+        
+        // Update user
+        let user = adminData.users.find(u => u.phone === payment.phone || u.id === payment.userId);
+        if (!user) {
+            user = {
+                id: payment.userId || Date.now(),
+                name: payment.userName,
+                phone: payment.phone,
+                sellerStatus: 'approved',
+                registrationDate: new Date().toISOString().split('T')[0],
+                confirmationCode: code
+            };
+            adminData.users.push(user);
+        } else {
             user.sellerStatus = 'approved';
-            user.role = 'seller';
             user.registrationDate = new Date().toISOString().split('T')[0];
+            user.confirmationCode = code;
         }
         
-        addActivity('payment_verified', `Payment KSH ${payment.amount} verified for ${payment.userName} (Code: ${payment.code})`);
-        saveAdminData(adminData);
-        loadPayments();
-        loadUsers();
+        // Update master balance
+        MASTER_ACCOUNT.balance += payment.amount;
+        
+        addActivity('payment_confirmed', `Payment verified for ${payment.userName} (Code: ${code}) - KSH ${payment.amount} received on ${MASTER_ACCOUNT.phone}`);
+        saveAdminData();
+        
+        document.getElementById('confirmModal').style.display = 'none';
+        currentPaymentToVerify = null;
+        
+        loadPaymentsView();
         loadDashboard();
-        alert(`✓ Payment verified!\n${payment.userName} is now an approved seller.`);
+        
+        alert(`✅ Payment Verified!\n\nConfirmation Code: ${code}\nAmount: KSH ${payment.amount}\nReceived on: ${MASTER_ACCOUNT.phone}\n\nUser can now sell on SecondChance.`);
     }
 
     function rejectPayment(paymentId) {
@@ -1063,188 +1259,201 @@
         if (payment) {
             payment.status = 'rejected';
             addActivity('payment_rejected', `Payment rejected for ${payment.userName}: ${reason}`);
-            saveAdminData(adminData);
-            loadPayments();
+            saveAdminData();
+            loadPaymentsView();
             loadDashboard();
         }
     }
 
-    // ==================== USERS ====================
-    function loadUsers() {
-        document.getElementById('usersTableBody').innerHTML = adminData.users.map(u => `
-            <tr>
-                <td><strong>${u.name}</strong></td>
-                <td>${u.email}</td>
-                <td>${u.role}</td>
-                <td><span class="status-badge status-${u.sellerStatus === 'approved' ? 'approved' : 'pending'}">${u.sellerStatus}</span></td>
-                <td>
-                    <button class="btn btn-outline btn-sm" onclick="viewUserDetails(${u.id})">👁 View</button>
-                    ${u.role === 'user' ? `<button class="btn btn-primary btn-sm" onclick="promoteToSeller(${u.id})">⭐ Make Seller</button>` : ''}
-                    <button class="btn btn-danger btn-sm" onclick="suspendUser(${u.id})">🚫 Suspend</button>
-                </td>
-            </tr>
-        `).join('');
-    }
-
-    function viewUserDetails(userId) {
-        const user = adminData.users.find(u => u.id === userId);
-        alert(`User Details:\nName: ${user.name}\nEmail: ${user.email}\nRole: ${user.role}\nSeller Status: ${user.sellerStatus}`);
-    }
-
-    function promoteToSeller(userId) {
-        const user = adminData.users.find(u => u.id === userId);
-        if (user && confirm(`Promote ${user.name} to seller?`)) {
-            user.role = 'seller';
-            user.sellerStatus = 'approved';
-            addActivity('user_promoted', `User ${user.name} promoted to seller`);
-            saveAdminData(adminData);
-            loadUsers();
-        }
-    }
-
-    function suspendUser(userId) {
-        const user = adminData.users.find(u => u.id === userId);
-        if (user && confirm(`Suspend ${user.name}?`)) {
-            user.role = 'suspended';
-            addActivity('user_suspended', `User ${user.name} suspended`);
-            saveAdminData(adminData);
-            loadUsers();
-        }
-    }
-
-    // ==================== ORDERS ====================
-    function loadOrders() {
-        document.getElementById('ordersTableBody').innerHTML = adminData.orders.length === 0 ? 
-            '<tr><td colspan="7" class="empty-state"><i class="fas fa-shopping-cart"></i><p>No orders yet</p></td></tr>' :
-            adminData.orders.map(o => `
-                <tr>
-                    <td>#${o.id}</td>
-                    <td>${o.buyer}</td>
-                    <td>${o.seller}</td>
-                    <td>${o.items.join(', ')}</td>
-                    <td><strong>KSH ${o.total.toLocaleString()}</strong></td>
-                    <td style="color:var(--success);">KSH ${o.commission}</td>
-                    <td>${o.date}</td>
-                </tr>
-            `).join('');
-    }
-
-    // ==================== COMMISSIONS ====================
-    function loadCommissions() {
-        const totalCommission = adminData.orders.reduce((sum, o) => sum + o.commission, 0);
-        document.getElementById('commissionStats').innerHTML = `
-            <div class="stat-card">
-                <div class="stat-value">KSH ${totalCommission.toLocaleString()}</div>
-                <div class="stat-label">Total Commissions Earned</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">${adminData.settings.lowCommission}%</div>
-                <div class="stat-label">Below KSH 10,000 Rate</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">${adminData.settings.highCommission}%</div>
-                <div class="stat-label">KSH 10,000+ Rate</div>
+    // ==================== USERS VIEW ====================
+    function loadUsersView() {
+        document.getElementById('usersView').innerHTML = `
+            <div class="top-bar"><h2>👥 User Management</h2></div>
+            <div class="table-container">
+                <div class="table-header"><h3>All Users</h3></div>
+                <table>
+                    <thead><tr><th>User</th><th>Phone</th><th>Role</th><th>Status</th><th>Confirmation</th><th>Actions</th></tr></thead>
+                    <tbody>
+                        ${adminData.users.length === 0 ? '<tr><td colspan="6" class="empty-state"><i class="fas fa-users"></i><p>No users registered yet</p></td></tr>' :
+                        adminData.users.map(u => `
+                            <tr>
+                                <td><strong>${u.name}</strong></td>
+                                <td>${u.phone || '—'}</td>
+                                <td>${u.role || 'user'}</td>
+                                <td><span class="status-badge status-${u.sellerStatus === 'approved' ? 'approved' : 'pending'}">${u.sellerStatus}</span></td>
+                                <td>${u.confirmationCode ? `<code style="color:var(--gold);">${u.confirmationCode}</code>` : '—'}</td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm" onclick="viewUser('${u.name}')">👁</button>
+                                    <button class="btn btn-danger btn-sm" onclick="removeUser(${u.id})">🗑</button>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
             </div>
         `;
-        
-        document.getElementById('lowCommission').value = adminData.settings.lowCommission;
-        document.getElementById('highCommission').value = adminData.settings.highCommission;
+    }
+
+    function viewUser(name) {
+        const user = adminData.users.find(u => u.name === name);
+        if (user) alert(`User: ${user.name}\nPhone: ${user.phone}\nStatus: ${user.sellerStatus}\nCode: ${user.confirmationCode || 'N/A'}`);
+    }
+
+    function removeUser(id) {
+        if (confirm('Remove this user?')) {
+            adminData.users = adminData.users.filter(u => u.id !== id);
+            saveAdminData();
+            loadUsersView();
+            loadDashboard();
+        }
+    }
+
+    // ==================== OTHER VIEWS ====================
+    function loadOrdersView() {
+        document.getElementById('ordersView').innerHTML = `
+            <div class="top-bar"><h2>🛒 Order Monitoring</h2></div>
+            <div class="table-container">
+                <div class="table-header"><h3>All Orders</h3></div>
+                <table>
+                    <thead><tr><th>Order ID</th><th>Buyer</th><th>Seller</th><th>Items</th><th>Total</th><th>Commission</th><th>Date</th></tr></thead>
+                    <tbody>
+                        ${adminData.orders.length === 0 ? '<tr><td colspan="7" class="empty-state"><i class="fas fa-shopping-cart"></i><p>No orders yet</p></td></tr>' :
+                        adminData.orders.map(o => `
+                            <tr>
+                                <td>#${o.id}</td><td>${o.buyer}</td><td>${o.seller}</td>
+                                <td>${o.items.join(', ')}</td>
+                                <td style="color:var(--gold);">KSH ${o.total.toLocaleString()}</td>
+                                <td style="color:var(--success);">KSH ${o.commission}</td>
+                                <td>${o.date}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `;
+    }
+
+    function loadCommissionsView() {
+        const totalCommission = adminData.orders.reduce((sum, o) => sum + o.commission, 0);
+        document.getElementById('commissionsView').innerHTML = `
+            <div class="top-bar"><h2>💰 Commission Management</h2></div>
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-value">KSH ${totalCommission.toLocaleString()}</div><div class="stat-label">Total Commissions</div></div>
+                <div class="stat-card"><div class="stat-value">${adminData.settings.lowCommission}%</div><div class="stat-label">Below KSH 10,000</div></div>
+                <div class="stat-card"><div class="stat-value">${adminData.settings.highCommission}%</div><div class="stat-label">KSH 10,000+</div></div>
+            </div>
+            <div class="table-container">
+                <div style="padding:24px;">
+                    <div class="grid-2">
+                        <div class="form-group"><label>Below KSH 10,000 Rate (%)</label><input type="number" class="form-input" id="lowCommission" value="${adminData.settings.lowCommission}" min="0" max="50" step="0.5"></div>
+                        <div class="form-group"><label>KSH 10,000+ Rate (%)</label><input type="number" class="form-input" id="highCommission" value="${adminData.settings.highCommission}" min="0" max="50" step="0.5"></div>
+                    </div>
+                    <button class="btn btn-primary" onclick="saveCommissionRates()">💾 Save & Sync</button>
+                </div>
+            </div>
+        `;
     }
 
     function saveCommissionRates() {
         const low = parseFloat(document.getElementById('lowCommission').value);
         const high = parseFloat(document.getElementById('highCommission').value);
-        
         if (isNaN(low) || isNaN(high)) return alert('Invalid rates');
-        
         adminData.settings.lowCommission = low;
         adminData.settings.highCommission = high;
-        addActivity('commission_updated', `Commission rates updated: ${low}% (<10K) / ${high}% (10K+)`);
-        saveAdminData(adminData);
-        loadCommissions();
-        alert('Commission rates saved!');
+        addActivity('commission_updated', `Commission rates: ${low}% (<10K) / ${high}% (10K+)`);
+        saveAdminData();
+        loadCommissionsView();
     }
 
-    // ==================== SETTINGS ====================
-    function loadSettings() {
-        document.getElementById('regFee').value = adminData.settings.registrationFee;
-        document.getElementById('platformStatus').value = adminData.settings.platformStatus;
+    function loadSettingsView() {
+        document.getElementById('settingsView').innerHTML = `
+            <div class="top-bar"><h2>⚙️ Platform Settings</h2></div>
+            <div class="table-container">
+                <div style="padding:24px;">
+                    <div class="form-group"><label>Registration Fee (KSH)</label><input type="number" class="form-input" id="regFee" value="${adminData.settings.registrationFee}"></div>
+                    <div class="form-group"><label>Master Account (Receives Payments)</label><input type="text" class="form-input" id="masterAccount" value="${adminData.settings.masterAccount}" disabled style="color:var(--gold);font-weight:600;"></div>
+                    <button class="btn btn-primary" onclick="saveSettings()">💾 Save & Sync</button>
+                </div>
+            </div>
+        `;
     }
 
     function saveSettings() {
         adminData.settings.registrationFee = parseInt(document.getElementById('regFee').value);
-        adminData.settings.platformStatus = document.getElementById('platformStatus').value;
         addActivity('settings_updated', 'Platform settings updated');
-        saveAdminData(adminData);
-        alert('Settings saved!');
+        saveAdminData();
+        loadSettingsView();
+        alert('Settings saved & synced to main app!');
     }
 
-    // ==================== ACTIVITY ====================
-    function loadActivity() {
-        document.getElementById('fullActivityLog').innerHTML = adminData.activityLog.map(log => `
-            <div class="activity-item">
-                <div class="activity-icon" style="background:${getActivityColor(log.type)}">${getActivityIcon(log.type)}</div>
-                <div>
-                    <div>${log.message}</div>
-                    <div class="activity-time">${log.time}</div>
+    function loadActivityView() {
+        document.getElementById('activityView').innerHTML = `
+            <div class="top-bar">
+                <h2>📜 Activity Log</h2>
+                <button class="btn btn-outline btn-sm" onclick="clearActivity()">Clear Log</button>
+            </div>
+            <div class="table-container">
+                <div class="activity-log">
+                    ${adminData.activityLog.map(log => `
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background:${getActivityColor(log.type)}">${getActivityIcon(log.type)}</div>
+                            <div><div>${log.message}</div><div class="activity-time">${log.time}</div></div>
+                        </div>
+                    `).join('') || '<div class="empty-state"><i class="fas fa-history"></i><p>No activity recorded</p></div>'}
                 </div>
             </div>
-        `).join('') || '<div class="empty-state">No activity recorded</div>';
+        `;
     }
 
-    function clearActivityLog() {
+    function clearActivity() {
         if (confirm('Clear all activity logs?')) {
             adminData.activityLog = [];
-            saveAdminData(adminData);
-            loadActivity();
+            saveAdminData();
+            loadActivityView();
         }
     }
 
     // ==================== HELPERS ====================
-    function updateBadges() {
+    function updateAllBadges() {
         const pendingProducts = adminData.products.filter(p => p.status === 'pending').length;
         const pendingPayments = adminData.payments.filter(p => p.status === 'pending').length;
         
         document.getElementById('pendingProductsBadge').textContent = pendingProducts;
         document.getElementById('pendingPaymentsBadge').textContent = pendingPayments;
-        
         document.getElementById('pendingProductsBadge').style.display = pendingProducts > 0 ? 'inline' : 'none';
         document.getElementById('pendingPaymentsBadge').style.display = pendingPayments > 0 ? 'inline' : 'none';
     }
 
-    function addTestData() {
-        // Quick way to add test data for demonstration
-        adminData.products.push({
-            id: Date.now(),
-            title: 'Test Product ' + Math.floor(Math.random() * 100),
-            category: 'electronics',
-            price: Math.floor(Math.random() * 50000) + 1000,
-            condition: 'good',
-            seller: 'Test Seller',
-            status: 'pending',
-            listedDate: new Date().toISOString().split('T')[0]
-        });
-        saveAdminData(adminData);
-        loadProducts();
-        loadDashboard();
+    // ==================== AUTO-SYNC ====================
+    function autoSync() {
+        pullFromMainApp();
+        updateMasterBalance();
     }
+
+    // Sync every 5 seconds
+    setInterval(autoSync, 5000);
 
     // ==================== INITIALIZATION ====================
     document.addEventListener('DOMContentLoaded', () => {
         loadDashboard();
-        updateBadges();
+        updateAllBadges();
+        updateMasterBalance();
+        syncToMainApp();
     });
 
-    // Close price modal on outside click
+    // Close modals on outside click
     document.getElementById('priceModal').addEventListener('click', function(e) {
         if (e.target === this) closePriceModal();
     });
+    document.getElementById('confirmModal').addEventListener('click', function(e) {
+        if (e.target === this) document.getElementById('confirmModal').style.display = 'none';
+    });
 
-    console.log('🛒 SecondChance Admin Panel Ready');
-    console.log('💡 Quick commands:');
-    console.log('  addTestData() - Add a sample pending product');
-    console.log('  adminData - View all admin data');
+    console.log('👑 SecondChance Admin Panel Ready');
+    console.log('📱 Master Account: 0792091769');
+    console.log('🔄 Live Sync: Active (every 5 seconds)');
+    console.log('💡 All changes here directly affect the main marketplace app');
 </script>
 
 </body>
-</html>
+    </html>
