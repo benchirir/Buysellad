@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecondChance Admin • Marketplace Control Panel</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #0a0e17;
+            --surface: #131923;
+            --surface-light: #1a2235;
+            --text: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --border: #1e293b;
+            --shadow: 0 4px 6px rgba(0,0,0,0.3);
+            --radius: 12px;
+            --transition: all 0.2s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            padding: 24px 0;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 100;
+            overflow-y: auto;
+        }
+
+        .sidebar-logo {
+            padding: 0 24px 24px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+
+        .sidebar-logo h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-light);
+        }
+
+        .sidebar-logo span {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            display: block;
+            margin-top: 4px;
+        }
+
+        .nav-section {
+            padding: 0 12px;
+            margin-bottom: 24px;
+        }
+
+        .nav-section-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-secondary);
+            padding: 0 12px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .nav-item:hover {
+            background: var(--surface-light);
+            color: var(--text);
+        }
+
+        .nav-item.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .nav-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .nav-badge {
+            background: var(--danger);
+            color: white;
+            border-radius: 10px;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            margin-left: auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            padding: 32px;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .top-bar h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .admin-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--surface);
+            padding: 8px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+
+        .admin-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 20px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .stat-icon {
+            font-size: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .stat-change {
+            font-size: 0.8rem;
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .change-up { background: rgba(16,185,129,0.2); color: var(--success); }
+        .change-down { background: rgba(239,68,68,0.2); color: var(--danger); }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Tables */
+        .table-container {
+            background: var(--surface);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .table-header h3 {
+            font-size: 1.1rem;
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: inherit;
+        }
+
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-light); }
+        .btn-success { background: var(--success); color: white; }
+        .btn-warning { background: var(--warning); color: #1a1a1a; }
+        .btn-danger { background: var(--danger); color: white; }
+        .btn-outline { border: 1px solid var(--border); background: transparent; color: var(--text); }
+
+        .btn-sm { padding: 6px 12px; font-size: 0.8rem; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 20px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+        }
+
+        td {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        tr:hover {
+            background: var(--surface-light);
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-pending { background: rgba(245,158,11,0.2); color: var(--warning); }
+        .status-approved { background: rgba(16,185,129,0.2); color: var(--success); }
+        .status-rejected { background: rgba(239,68,68,0.2); color: var(--danger); }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 28px;
+            max-width: 560px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            animation: modalSlide 0.2s ease;
+        }
+
+        @keyframes modalSlide {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal h2 { margin-bottom: 20px; font-size: 1.4rem; }
+        .modal h3 { margin: 16px 0 8px; color: var(--text-secondary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; margin-bottom: 6px; font-weight: 500; font-size: 0.9rem; }
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .price-adjust {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .price-adjust input {
+            width: 120px;
+        }
+
+        .price-suggestion {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .activity-log {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.85rem;
+        }
+
+        .activity-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .activity-time {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0 12px;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            color: var(--text);
+            padding: 8px;
+            flex: 1;
+            outline: none;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar { width: 200px; }
+            .main-content { margin-left: 200px; padding: 20px; }
+            .stats-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="admin-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <h1>SecondChance</h1>
+            <span>Admin Control Panel</span>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Main</div>
+            <div class="nav-item active" onclick="navigateTo('dashboard')">
+                <i class="fas fa-th-large"></i> Dashboard
+            </div>
+            <div class="nav-item" onclick="navigateTo('products')">
+                <i class="fas fa-box"></i> Products
+                <span class="nav-badge" id="pendingProductsBadge">0</span>
+            </div>
+            <div class="nav-item" onclick="navigateTo('payments')">
+                <i class="fas fa-money-bill-wave"></i> Payments
+                <span class="nav-badge" id="pendingPaymentsBadge">0</span>
+            </div>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Management</div>
+            <div class="nav-item" onclick="navigateTo('users')">
+                <i class="fas fa-users"></i> Users
+            </div>
+            <div class="nav-item" onclick="navigateTo('orders')">
+                <i class="fas fa-shopping-cart"></i> Orders
+            </div>
+            <div class="nav-item" onclick="navigateTo('commissions')">
+                <i class="fas fa-percent"></i> Commissions
+            </div>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Settings</div>
+            <div class="nav-item" onclick="navigateTo('settings')">
+                <i class="fas fa-cog"></i> Platform Settings
+            </div>
+            <div class="nav-item" onclick="navigateTo('activity')">
+                <i class="fas fa-history"></i> Activity Log
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Dashboard View (default) -->
+        <div id="dashboardView">
+            <div class="top-bar">
+                <h2>📊 Dashboard Overview</h2>
+                <div class="admin-profile">
+                    <div class="admin-avatar">A</div>
+                    <span>Admin User</span>
+                </div>
+            </div>
+
+            <div class="stats-grid" id="statsGrid"></div>
+
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>Recent Activity</h3>
+                </div>
+                <div class="activity-log" id="recentActivity"></div>
+            </div>
+        </div>
+
+        <!-- Products View -->
+        <div id="productsView" style="display:none;">
+            <div class="top-bar">
+                <h2>📦 Product Management</h2>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search products..." oninput="filterProducts(this.value)">
+                </div>
+            </div>
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>All Products</h3>
+                    <div class="table-actions">
+                        <button class="btn btn-outline btn-sm" onclick="filterProductStatus('all')">All</button>
+                        <button class="btn btn-warning btn-sm" onclick="filterProductStatus('pending')">Pending</button>
+                        <button class="btn btn-success btn-sm" onclick="filterProductStatus('approved')">Approved</button>
+                        <button class="btn btn-danger btn-sm" onclick="filterProductStatus('rejected')">Rejected</button>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Seller</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productsTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Payments View -->
+        <div id="paymentsView" style="display:none;">
+            <div class="top-bar">
+                <h2>💳 Payment Verification</h2>
+            </div>
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>Registration Fee Payments</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Amount</th>
+                            <th>Method</th>
+                            <th>Transaction Code</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="paymentsTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Users View -->
+        <div id="usersView" style="display:none;">
+            <div class="top-bar">
+                <h2>👥 User Management</h2>
+            </div>
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>All Users</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Seller Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Orders View -->
+        <div id="ordersView" style="display:none;">
+            <div class="top-bar">
+                <h2>🛒 Order Monitoring</h2>
+            </div>
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>All Orders</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Buyer</th>
+                            <th>Seller</th>
+                            <th>Items</th>
+                            <th>Total</th>
+                            <th>Commission</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Commissions View -->
+        <div id="commissionsView" style="display:none;">
+            <div class="top-bar">
+                <h2>💰 Commission Management</h2>
+            </div>
+            <div class="stats-grid" id="commissionStats"></div>
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>Commission Rates (Adjustable)</h3>
+                </div>
+                <div style="padding:20px;">
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Below KSH 10,000 (%)</label>
+                            <input type="number" class="form-input" id="lowCommission" value="3" min="0" max="50" step="0.5">
+                        </div>
+                        <div class="form-group">
+                            <label>KSH 10,000 and Above (%)</label>
+                            <input type="number" class="form-input" id="highCommission" value="5" min="0" max="50" step="0.5">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="saveCommissionRates()">Save Rates</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings View -->
+        <div id="settingsView" style="display:none;">
+            <div class="top-bar">
+                <h2>⚙️ Platform Settings</h2>
+            </div>
+            <div class="table-container">
+                <div style="padding:20px;">
+                    <div class="form-group">
+                        <label>Registration Fee (KSH)</label>
+                        <input type="number" class="form-input" id="regFee" value="350" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Platform Status</label>
+                        <select class="form-select" id="platformStatus">
+                            <option value="active">Active</option>
+                            <option value="maintenance">Maintenance Mode</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity View -->
+        <div id="activityView" style="display:none;">
+            <div class="top-bar">
+                <h2>📜 Activity Log</h2>
+                <button class="btn btn-outline btn-sm" onclick="clearActivityLog()">Clear Log</button>
+            </div>
+            <div class="table-container">
+                <div class="activity-log" id="fullActivityLog"></div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Price Adjustment Modal -->
+<div class="modal-overlay" id="priceModal" style="display:none;">
+    <div class="modal">
+        <h2>Adjust Product Price</h2>
+        <div class="form-group">
+            <label>Current Price</label>
+            <input type="text" class="form-input" id="currentPriceDisplay" disabled>
+        </div>
+        <div class="form-group">
+            <label>New Price (KSH)</label>
+            <div class="price-adjust">
+                <input type="number" class="form-input" id="newPrice" min="0">
+                <button class="btn btn-warning" onclick="suggestMarketPrice()">Suggest Market Price</button>
+            </div>
+            <div class="price-suggestion" id="priceSuggestion"></div>
+        </div>
+        <div class="form-group">
+            <label>Reason for Adjustment</label>
+            <textarea class="form-textarea" id="priceReason" placeholder="Explain why the price needs adjustment..."></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="savePriceAdjustment()">Save Adjustment</button>
+        <button class="btn btn-outline" onclick="closePriceModal()">Cancel</button>
+    </div>
+</div>
+
+<script>
+    // ==================== DATA STORE ====================
+    // In production, this would come from your backend API
+    let adminData = JSON.parse(localStorage.getItem('adminData')) || initializeAdminData();
+
+    function initializeAdminData() {
+        const data = {
+            products: [
+                { id: 1, title: 'Samsung Fridge 200L', category: 'kitchen', price: 45000, condition: 'good', seller: 'Jane Doe', status: 'approved', listedDate: '2024-01-15' },
+                { id: 2, title: 'Non-stick Pan Set', category: 'kitchen', price: 2500, condition: 'like-new', seller: 'Mike Smith', status: 'approved', listedDate: '2024-01-16' },
+                { id: 3, title: 'iPhone 13 Pro', category: 'electronics', price: 85000, condition: 'good', seller: 'Tech Guru', status: 'pending', listedDate: '2024-01-17' },
+                { id: 4, title: 'Leather Sofa Set', category: 'furniture', price: 35000, condition: 'fair', seller: 'Home Decor', status: 'pending', listedDate: '2024-01-18' },
+                { id: 5, title: 'Evening Gown', category: 'fashion', price: 8000, condition: 'like-new', seller: 'Fashionista', status: 'approved', listedDate: '2024-01-14' },
+                { id: 6, title: 'Alloy Rims 17"', category: 'automotive', price: 15000, condition: 'good', seller: 'Car Parts', status: 'rejected', listedDate: '2024-01-13' },
+                { id: 7, title: 'Overpriced Watch', category: 'fashion', price: 500000, condition: 'new', seller: 'Luxury Seller', status: 'pending', listedDate: '2024-01-19' },
+                { id: 8, title: 'Old Textbook', category: 'books', price: 100, condition: 'poor', seller: 'Student', status: 'pending', listedDate: '2024-01-19' }
+            ],
+            payments: [
+                { id: 1, userId: 101, userName: 'Jane Doe', amount: 350, method: 'mpesa', code: 'QWE1234567', date: '2024-01-15', status: 'pending' },
+                { id: 2, userId: 102, userName: 'Mike Smith', amount: 350, method: 'bank', code: 'BANK98765', date: '2024-01-16', status: 'pending' },
+                { id: 3, userId: 103, userName: 'Tech Guru', amount: 350, method: 'mpesa', code: 'MPS456789', date: '2024-01-17', status: 'pending' },
+                { id: 4, userId: 104, userName: 'New Seller', amount: 350, method: 'card', code: 'CARD12345', date: '2024-01-20', status: 'pending' }
+            ],
+            users: [
+                { id: 101, name: 'Jane Doe', email: 'jane@email.com', role: 'seller', sellerStatus: 'approved', registrationDate: '2024-01-15' },
+                { id: 102, name: 'Mike Smith', email: 'mike@email.com', role: 'seller', sellerStatus: 'approved', registrationDate: '2024-01-16' },
+                { id: 103, name: 'Tech Guru', email: 'tech@email.com', role: 'user', sellerStatus: 'pending', registrationDate: null },
+                { id: 104, name: 'New Seller', email: 'new@email.com', role: 'user', sellerStatus: 'pending', registrationDate: null }
+            ],
+            orders: [
+                { id: 1001, buyer: 'John Buyer', seller: 'Jane Doe', items: ['Samsung Fridge'], total: 45000, commission: 2250, date: '2024-01-17' },
+                { id: 1002, buyer: 'Alice Customer', seller: 'Mike Smith', items: ['Pan Set'], total: 2500, commission: 75, date: '2024-01-18' }
+            ],
+            activityLog: [
+                { type: 'product_approved', message: 'Product "Samsung Fridge" approved', time: '2024-01-15 14:30' },
+                { type: 'payment_verified', message: 'Payment verified for Jane Doe', time: '2024-01-15 14:25' },
+                { type: 'user_registered', message: 'New user Mike Smith registered', time: '2024-01-16 10:15' }
+            ],
+            settings: {
+                registrationFee: 350,
+                lowCommission: 3,
+                highCommission: 5,
+                platformStatus: 'active'
+            },
+            currentPriceEdit: null
+        };
+        saveAdminData(data);
+        return data;
+    }
+
+    function saveAdminData(data) {
+        localStorage.setItem('adminData', JSON.stringify(data));
+    }
+
+    // ==================== NAVIGATION ====================
+    function navigateTo(view) {
+        // Hide all views
+        ['dashboardView', 'productsView', 'paymentsView', 'usersView', 'ordersView', 'commissionsView', 'settingsView', 'activityView'].forEach(v => {
+            document.getElementById(v).style.display = 'none';
+        });
+        
+        // Show selected view
+        const viewMap = {
+            'dashboard': 'dashboardView',
+            'products': 'productsView',
+            'payments': 'paymentsView',
+            'users': 'usersView',
+            'orders': 'ordersView',
+            'commissions': 'commissionsView',
+            'settings': 'settingsView',
+            'activity': 'activityView'
+        };
+        
+        if (viewMap[view]) {
+            document.getElementById(viewMap[view]).style.display = 'block';
+        }
+        
+        // Update active nav item
+        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+        event.target.closest('.nav-item')?.classList.add('active');
+        
+        // Load data for the view
+        loadViewData(view);
+    }
+
+    function loadViewData(view) {
+        switch(view) {
+            case 'dashboard': loadDashboard(); break;
+            case 'products': loadProducts(); break;
+            case 'payments': loadPayments(); break;
+            case 'users': loadUsers(); break;
+            case 'orders': loadOrders(); break;
+            case 'commissions': loadCommissions(); break;
+            case 'settings': loadSettings(); break;
+            case 'activity': loadActivity(); break;
+        }
+    }
+
+    // ==================== DASHBOARD ====================
+    function loadDashboard() {
+        const pendingProducts = adminData.products.filter(p => p.status === 'pending').length;
+        const pendingPayments = adminData.payments.filter(p => p.status === 'pending').length;
+        const totalRevenue = adminData.orders.reduce((sum, o) => sum + o.commission, 0);
+        const totalUsers = adminData.users.length;
+
+        document.getElementById('statsGrid').innerHTML = `
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-icon">📦</span>
+                    <span class="stat-change change-up">Pending: ${pendingProducts}</span>
+                </div>
+                <div class="stat-value">${adminData.products.length}</div>
+                <div class="stat-label">Total Products</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-icon">💳</span>
+                    <span class="stat-change ${pendingPayments > 0 ? 'change-down' : 'change-up'}">Pending: ${pendingPayments}</span>
+                </div>
+                <div class="stat-value">${adminData.payments.length}</div>
+                <div class="stat-label">Payment Requests</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-icon">💰</span>
+                    <span class="stat-change change-up">+${totalRevenue} KSH</span>
+                </div>
+                <div class="stat-value">KSH ${totalRevenue.toLocaleString()}</div>
+                <div class="stat-label">Total Commission Revenue</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-icon">👥</span>
+                </div>
+                <div class="stat-value">${totalUsers}</div>
+                <div class="stat-label">Registered Users</div>
+            </div>
+        `;
+
+        document.getElementById('recentActivity').innerHTML = adminData.activityLog.slice(-5).reverse().map(log => `
+            <div class="activity-item">
+                <div class="activity-icon" style="background:${getActivityColor(log.type)}">${getActivityIcon(log.type)}</div>
+                <div>
+                    <div>${log.message}</div>
+                    <div class="activity-time">${log.time}</div>
+                </div>
+            </div>
+        `).join('') || '<div class="empty-state">No recent activity</div>';
+
+        updateBadges();
+    }
+
+    function getActivityColor(type) {
+        const colors = { product_approved: 'rgba(16,185,129,0.3)', payment_verified: 'rgba(59,130,246,0.3)', user_registered: 'rgba(139,92,246,0.3)' };
+        return colors[type] || 'rgba(100,116,139,0.3)';
+    }
+
+    function getActivityIcon(type) {
+        const icons = { product_approved: '✓', payment_verified: '$', user_registered: '👤' };
+        return icons[type] || '•';
+    }
+
+    function addActivity(type, message) {
+        adminData.activityLog.unshift({ type, message, time: new Date().toLocaleString() });
+        saveAdminData(adminData);
+    }
+
+    // ==================== PRODUCTS ====================
+    let productFilter = 'all';
+
+    function loadProducts(filterStatus = productFilter) {
+        productFilter = filterStatus;
+        const filtered = filterStatus === 'all' ? adminData.products : adminData.products.filter(p => p.status === filterStatus);
+        
+        document.getElementById('productsTableBody').innerHTML = filtered.map(p => `
+            <tr>
+                <td><strong>${p.title}</strong><br><small>${p.category} • ${p.condition}</small></td>
+                <td>${p.seller}</td>
+                <td><strong>KSH ${p.price.toLocaleString()}</strong></td>
+                <td><span class="status-badge status-${p.status}">${p.status}</span></td>
+                <td>
+                    <button class="btn btn-success btn-sm" onclick="approveProduct(${p.id})">✓</button>
+                    <button class="btn btn-danger btn-sm" onclick="rejectProduct(${p.id})">✕</button>
+                    <button class="btn btn-warning btn-sm" onclick="openPriceModal(${p.id})">💲</button>
+                </td>
+            </tr>
+        `).join('');
+
+        updateBadges();
+    }
+
+    function approveProduct(id) {
+        const product = adminData.products.find(p => p.id === id);
+        if (product) {
+            product.status = 'approved';
+            addActivity('product_approved', `Product "${product.title}" approved`);
+            saveAdminData(adminData);
+            loadProducts();
+            loadDashboard();
+        }
+    }
+
+    function rejectProduct(id) {
+        const reason = prompt('Rejection reason:');
+        if (!reason) return;
+        const product = adminData.products.find(p => p.id === id);
+        if (product) {
+            product.status = 'rejected';
+            addActivity('product_rejected', `Product "${product.title}" rejected: ${reason}`);
+            saveAdminData(adminData);
+            loadProducts();
+        }
+    }
+
+    function filterProducts(search) {
+        const term = search.toLowerCase();
+        const filtered = adminData.products.filter(p => 
+            p.title.toLowerCase().includes(term) || 
+            p.seller.toLowerCase().includes(term) ||
+            p.category.toLowerCase().includes(term)
+        );
+        document.getElementById('productsTableBody').innerHTML = filtered.map(p => `
+            <tr>
+                <td><strong>${p.title}</strong><br><small>${p.category} • ${p.condition}</small></td>
+                <td>${p.seller}</td>
+                <td><strong>KSH ${p.price.toLocaleString()}</strong></td>
+                <td><span class="status-badge status-${p.status}">${p.status}</span></td>
+                <td>
+                    <button class="btn btn-success btn-sm" onclick="approveProduct(${p.id})">✓</button>
+                    <button class="btn btn-danger btn-sm" onclick="rejectProduct(${p.id})">✕</button>
+                    <button class="btn btn-warning btn-sm" onclick="openPriceModal(${p.id})">💲</button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    function filterProductStatus(status) {
+        loadProducts(status);
+    }
+
+    // ==================== PRICE ADJUSTMENT ====================
+    function openPriceModal(productId) {
+        const product = adminData.products.find(p => p.id === productId);
+        if (!product) return;
+        
+        adminData.currentPriceEdit = productId;
+        document.getElementById('currentPriceDisplay').value = `KSH ${product.price.toLocaleString()}`;
+        document.getElementById('newPrice').value = product.price;
+        document.getElementById('priceReason').value = '';
+        document.getElementById('priceSuggestion').innerHTML = '';
+        document.getElementById('priceModal').style.display = 'flex';
+    }
+
+    function closePriceModal() {
+        document.getElementById('priceModal').style.display = 'none';
+        adminData.currentPriceEdit = null;
+    }
+
+    function suggestMarketPrice() {
+        const product = adminData.products.find(p => p.id === adminData.currentPriceEdit);
+        if (!product) return;
+        
+        // Simple market price suggestion based on category averages
+        const categoryProducts = adminData.products.filter(p => p.category === product.category && p.id !== product.id);
+        const avgPrice = categoryProducts.length > 0 
+            ? categoryProducts.reduce((sum, p) => sum + p.price, 0) / categoryProducts.length 
+            : product.price * 0.8;
+        
+        const suggestedPrice = Math.round(avgPrice / 100) * 100;
+        document.getElementById('newPrice').value = suggestedPrice;
+        document.getElementById('priceSuggestion').innerHTML = `
+            💡 Suggested market price: <strong>KSH ${suggestedPrice.toLocaleString()}</strong> 
+            (based on ${categoryProducts.length} similar items in ${product.category})
+        `;
+    }
+
+    function savePriceAdjustment() {
+        const productId = adminData.currentPriceEdit;
+        const newPrice = parseFloat(document.getElementById('newPrice').value);
+        const reason = document.getElementById('priceReason').value;
+        
+        if (!newPrice || newPrice < 0) return alert('Please enter a valid price');
+        
+        const product = adminData.products.find(p => p.id === productId);
+        if (product) {
+            const oldPrice = product.price;
+            product.price = newPrice;
+            addActivity('price_adjusted', `Price adjusted for "${product.title}" from KSH ${oldPrice} to KSH ${newPrice}: ${reason || 'No reason provided'}`);
+            saveAdminData(adminData);
+            closePriceModal();
+            loadProducts();
+            loadDashboard();
+            alert(`Price adjusted successfully!\nOld: KSH ${oldPrice.toLocaleString()}\nNew: KSH ${newPrice.toLocaleString()}`);
+        }
+    }
+
+    // ==================== PAYMENTS ====================
+    function loadPayments() {
+        document.getElementById('paymentsTableBody').innerHTML = adminData.payments.map(p => `
+            <tr>
+                <td><strong>${p.userName}</strong></td>
+                <td>KSH ${p.amount}</td>
+                <td>${p.method.toUpperCase()}</td>
+                <td><code>${p.code}</code></td>
+                <td>${p.date}</td>
+                <td><span class="status-badge status-${p.status}">${p.status}</span></td>
+                <td>
+                    ${p.status === 'pending' ? `
+                        <button class="btn btn-success btn-sm" onclick="verifyPayment(${p.id})">✓ Verify</button>
+                        <button class="btn btn-danger btn-sm" onclick="rejectPayment(${p.id})">✕ Reject</button>
+                    ` : '—'}
+                </td>
+            </tr>
+        `).join('') || '<tr><td colspan="7" class="empty-state">No payments to display</td></tr>';
+
+        updateBadges();
+    }
+
+    function verifyPayment(paymentId) {
+        const payment = adminData.payments.find(p => p.id === paymentId);
+        if (!payment) return;
+        
+        payment.status = 'completed';
+        
+        // Update user's seller status
+        const user = adminData.users.find(u => u.id === payment.userId);
+        if (user) {
+            user.sellerStatus = 'approved';
+            user.role = 'seller';
+            user.registrationDate = new Date().toISOString().split('T')[0];
+        }
+        
+        addActivity('payment_verified', `Payment KSH ${payment.amount} verified for ${payment.userName} (Code: ${payment.code})`);
+        saveAdminData(adminData);
+        loadPayments();
+        loadUsers();
+        loadDashboard();
+        alert(`✓ Payment verified!\n${payment.userName} is now an approved seller.`);
+    }
+
+    function rejectPayment(paymentId) {
+        const reason = prompt('Rejection reason:');
+        if (!reason) return;
+        
+        const payment = adminData.payments.find(p => p.id === paymentId);
+        if (payment) {
+            payment.status = 'rejected';
+            addActivity('payment_rejected', `Payment rejected for ${payment.userName}: ${reason}`);
+            saveAdminData(adminData);
+            loadPayments();
+            loadDashboard();
+        }
+    }
+
+    // ==================== USERS ====================
+    function loadUsers() {
+        document.getElementById('usersTableBody').innerHTML = adminData.users.map(u => `
+            <tr>
+                <td><strong>${u.name}</strong></td>
+                <td>${u.email}</td>
+                <td>${u.role}</td>
+                <td><span class="status-badge status-${u.sellerStatus === 'approved' ? 'approved' : 'pending'}">${u.sellerStatus}</span></td>
+                <td>
+                    <button class="btn btn-outline btn-sm" onclick="viewUserDetails(${u.id})">👁 View</button>
+                    ${u.role === 'user' ? `<button class="btn btn-primary btn-sm" onclick="promoteToSeller(${u.id})">⭐ Make Seller</button>` : ''}
+                    <button class="btn btn-danger btn-sm" onclick="suspendUser(${u.id})">🚫 Suspend</button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    function viewUserDetails(userId) {
+        const user = adminData.users.find(u => u.id === userId);
+        alert(`User Details:\nName: ${user.name}\nEmail: ${user.email}\nRole: ${user.role}\nSeller Status: ${user.sellerStatus}`);
+    }
+
+    function promoteToSeller(userId) {
+        const user = adminData.users.find(u => u.id === userId);
+        if (user && confirm(`Promote ${user.name} to seller?`)) {
+            user.role = 'seller';
+            user.sellerStatus = 'approved';
+            addActivity('user_promoted', `User ${user.name} promoted to seller`);
+            saveAdminData(adminData);
+            loadUsers();
+        }
+    }
+
+    function suspendUser(userId) {
+        const user = adminData.users.find(u => u.id === userId);
+        if (user && confirm(`Suspend ${user.name}?`)) {
+            user.role = 'suspended';
+            addActivity('user_suspended', `User ${user.name} suspended`);
+            saveAdminData(adminData);
+            loadUsers();
+        }
+    }
+
+    // ==================== ORDERS ====================
+    function loadOrders() {
+        document.getElementById('ordersTableBody').innerHTML = adminData.orders.length === 0 ? 
+            '<tr><td colspan="7" class="empty-state"><i class="fas fa-shopping-cart"></i><p>No orders yet</p></td></tr>' :
+            adminData.orders.map(o => `
+                <tr>
+                    <td>#${o.id}</td>
+                    <td>${o.buyer}</td>
+                    <td>${o.seller}</td>
+                    <td>${o.items.join(', ')}</td>
+                    <td><strong>KSH ${o.total.toLocaleString()}</strong></td>
+                    <td style="color:var(--success);">KSH ${o.commission}</td>
+                    <td>${o.date}</td>
+                </tr>
+            `).join('');
+    }
+
+    // ==================== COMMISSIONS ====================
+    function loadCommissions() {
+        const totalCommission = adminData.orders.reduce((sum, o) => sum + o.commission, 0);
+        document.getElementById('commissionStats').innerHTML = `
+            <div class="stat-card">
+                <div class="stat-value">KSH ${totalCommission.toLocaleString()}</div>
+                <div class="stat-label">Total Commissions Earned</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">${adminData.settings.lowCommission}%</div>
+                <div class="stat-label">Below KSH 10,000 Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">${adminData.settings.highCommission}%</div>
+                <div class="stat-label">KSH 10,000+ Rate</div>
+            </div>
+        `;
+        
+        document.getElementById('lowCommission').value = adminData.settings.lowCommission;
+        document.getElementById('highCommission').value = adminData.settings.highCommission;
+    }
+
+    function saveCommissionRates() {
+        const low = parseFloat(document.getElementById('lowCommission').value);
+        const high = parseFloat(document.getElementById('highCommission').value);
+        
+        if (isNaN(low) || isNaN(high)) return alert('Invalid rates');
+        
+        adminData.settings.lowCommission = low;
+        adminData.settings.highCommission = high;
+        addActivity('commission_updated', `Commission rates updated: ${low}% (<10K) / ${high}% (10K+)`);
+        saveAdminData(adminData);
+        loadCommissions();
+        alert('Commission rates saved!');
+    }
+
+    // ==================== SETTINGS ====================
+    function loadSettings() {
+        document.getElementById('regFee').value = adminData.settings.registrationFee;
+        document.getElementById('platformStatus').value = adminData.settings.platformStatus;
+    }
+
+    function saveSettings() {
+        adminData.settings.registrationFee = parseInt(document.getElementById('regFee').value);
+        adminData.settings.platformStatus = document.getElementById('platformStatus').value;
+        addActivity('settings_updated', 'Platform settings updated');
+        saveAdminData(adminData);
+        alert('Settings saved!');
+    }
+
+    // ==================== ACTIVITY ====================
+    function loadActivity() {
+        document.getElementById('fullActivityLog').innerHTML = adminData.activityLog.map(log => `
+            <div class="activity-item">
+                <div class="activity-icon" style="background:${getActivityColor(log.type)}">${getActivityIcon(log.type)}</div>
+                <div>
+                    <div>${log.message}</div>
+                    <div class="activity-time">${log.time}</div>
+                </div>
+            </div>
+        `).join('') || '<div class="empty-state">No activity recorded</div>';
+    }
+
+    function clearActivityLog() {
+        if (confirm('Clear all activity logs?')) {
+            adminData.activityLog = [];
+            saveAdminData(adminData);
+            loadActivity();
+        }
+    }
+
+    // ==================== HELPERS ====================
+    function updateBadges() {
+        const pendingProducts = adminData.products.filter(p => p.status === 'pending').length;
+        const pendingPayments = adminData.payments.filter(p => p.status === 'pending').length;
+        
+        document.getElementById('pendingProductsBadge').textContent = pendingProducts;
+        document.getElementById('pendingPaymentsBadge').textContent = pendingPayments;
+        
+        document.getElementById('pendingProductsBadge').style.display = pendingProducts > 0 ? 'inline' : 'none';
+        document.getElementById('pendingPaymentsBadge').style.display = pendingPayments > 0 ? 'inline' : 'none';
+    }
+
+    function addTestData() {
+        // Quick way to add test data for demonstration
+        adminData.products.push({
+            id: Date.now(),
+            title: 'Test Product ' + Math.floor(Math.random() * 100),
+            category: 'electronics',
+            price: Math.floor(Math.random() * 50000) + 1000,
+            condition: 'good',
+            seller: 'Test Seller',
+            status: 'pending',
+            listedDate: new Date().toISOString().split('T')[0]
+        });
+        saveAdminData(adminData);
+        loadProducts();
+        loadDashboard();
+    }
+
+    // ==================== INITIALIZATION ====================
+    document.addEventListener('DOMContentLoaded', () => {
+        loadDashboard();
+        updateBadges();
+    });
+
+    // Close price modal on outside click
+    document.getElementById('priceModal').addEventListener('click', function(e) {
+        if (e.target === this) closePriceModal();
+    });
+
+    console.log('🛒 SecondChance Admin Panel Ready');
+    console.log('💡 Quick commands:');
+    console.log('  addTestData() - Add a sample pending product');
+    console.log('  adminData - View all admin data');
+</script>
+
+</body>
+</html>
