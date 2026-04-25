@@ -2,8 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>SecondChance Admin • Master Control Panel</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SecondChance Admin">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="application-name" content="SecondChance Admin">
+    
+    <!-- PWA Manifest -->
+    <script>
+        // Create manifest dynamically to allow download
+        const manifest = {
+            name: "SecondChance Admin Panel",
+            short_name: "SC Admin",
+            description: "Master Control Panel for SecondChance Marketplace",
+            start_url: location.href,
+            display: "standalone",
+            background_color: "#0a0a0a",
+            theme_color: "#c9a84c",
+            orientation: "portrait-primary",
+            icons: [{
+                src: "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192"><rect width="192" height="192" rx="32" fill="#0a0a0a"/><text x="96" y="120" font-size="90" text-anchor="middle" fill="#c9a84c">👑</text></svg>'),
+                sizes: "192x192",
+                type: "image/svg+xml",
+                purpose: "any maskable"
+            }, {
+                src: "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><rect width="512" height="512" rx="64" fill="#0a0a0a"/><text x="256" y="320" font-size="240" text-anchor="middle" fill="#c9a84c">👑</text></svg>'),
+                sizes: "512x512",
+                type: "image/svg+xml",
+                purpose: "any maskable"
+            }]
+        };
+        
+        const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+        const manifestURL = URL.createObjectURL(manifestBlob);
+        const link = document.createElement('link');
+        link.rel = 'manifest';
+        link.href = manifestURL;
+        document.head.appendChild(link);
+    </script>
+    
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -33,6 +75,7 @@
             --shadow-gold: 0 4px 20px rgba(201,168,76,0.3);
             --radius: 12px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --safe-area-bottom: env(safe-area-inset-bottom, 0px);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -181,6 +224,8 @@
             margin-bottom: 36px;
             padding-bottom: 20px;
             border-bottom: 1px solid rgba(201,168,76,0.2);
+            flex-wrap: wrap;
+            gap: 12px;
         }
         .top-bar h2 {
             font-family: 'Playfair Display', serif;
@@ -267,11 +312,11 @@
         .stat-value { font-size: 2.2rem; font-weight: 800; margin-bottom: 6px; font-family: 'Playfair Display', serif; color: var(--gold); }
         .stat-label { color: var(--grey); font-size: 0.85rem; font-weight: 500; }
         .table-container { background: var(--black-surface); border-radius: var(--radius); border: 1px solid rgba(201,168,76,0.15); overflow: hidden; margin-bottom: 28px; }
-        .table-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid rgba(201,168,76,0.2); background: rgba(201,168,76,0.03); }
+        .table-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid rgba(201,168,76,0.2); background: rgba(201,168,76,0.03); flex-wrap: wrap; gap: 12px; }
         .table-header h3 { font-size: 1.1rem; font-weight: 600; color: var(--gold-light); }
-        .table-actions { display: flex; gap: 8px; }
+        .table-actions { display: flex; gap: 8px; flex-wrap: wrap; }
         .btn {
-            padding: 10px 18px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: var(--transition); display: flex; align-items: center; gap: 6px; font-family: inherit; letter-spacing: 0.3px;
+            padding: 10px 18px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: var(--transition); display: inline-flex; align-items: center; gap: 6px; font-family: inherit; letter-spacing: 0.3px; white-space: nowrap;
         }
         .btn-primary { background: linear-gradient(135deg, var(--gold-dark), var(--gold)); color: var(--black); font-weight: 700; }
         .btn-primary:hover { box-shadow: var(--shadow-gold); transform: translateY(-1px); }
@@ -307,7 +352,7 @@
             width: 100%; padding: 12px 16px; border: 1px solid rgba(201,168,76,0.3); border-radius: 8px; background: var(--black-light); color: var(--white); font-family: inherit; font-size: 0.9rem; transition: var(--transition);
         }
         .form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.1); }
-        .price-adjust { display: flex; gap: 10px; align-items: center; }
+        .price-adjust { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
         .price-adjust input { width: 140px; }
         .price-suggestion { font-size: 0.8rem; color: var(--gold-light); margin-top: 6px; font-weight: 500; }
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -317,21 +362,65 @@
         .activity-time { color: var(--grey); font-size: 0.75rem; margin-top: 4px; }
         .search-box { display: flex; align-items: center; background: var(--black-light); border: 1px solid rgba(201,168,76,0.3); border-radius: 8px; padding: 0 14px; transition: var(--transition); }
         .search-box:focus-within { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.1); }
-        .search-box input { border: none; background: transparent; color: var(--white); padding: 10px; flex: 1; outline: none; font-family: inherit; }
+        .search-box input { border: none; background: transparent; color: var(--white); padding: 10px; flex: 1; outline: none; font-family: inherit; min-width: 0; }
         .empty-state { text-align: center; padding: 50px; color: var(--grey); }
         .empty-state i { font-size: 3.5rem; margin-bottom: 16px; color: var(--gold-dark); }
         .confirmation-code {
             font-family: 'Courier New', monospace; background: var(--black-light); padding: 10px 16px; border-radius: 8px; color: var(--gold); font-size: 1rem; letter-spacing: 2px; text-align: center; border: 1px solid rgba(201,168,76,0.3); font-weight: 700;
         }
         .download-btn {
-            background: transparent; border: 1px solid var(--gold-dark); color: var(--gold); padding: 8px 18px; border-radius: 8px; cursor: pointer; transition: var(--transition);
+            background: linear-gradient(135deg, var(--gold-dark), var(--brown)); 
+            border: 1px solid var(--gold); 
+            color: var(--black); 
+            padding: 10px 20px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            transition: var(--transition);
+            font-weight: 700;
+            font-size: 0.9rem;
         }
-        .download-btn:hover { background: rgba(201,168,76,0.2); }
+        .download-btn:hover { 
+            background: linear-gradient(135deg, var(--gold), var(--gold-light)); 
+            box-shadow: var(--shadow-gold);
+            transform: translateY(-2px);
+        }
+        
+        /* Mobile responsive */
         @media (max-width: 768px) {
-            .sidebar { width: 220px; }
-            .main-content { margin-left: 220px; padding: 20px; }
-            .stats-grid { grid-template-columns: 1fr; }
+            .sidebar { 
+                width: 100%; 
+                height: auto; 
+                position: relative; 
+                padding: 16px 0; 
+                overflow-y: visible; 
+            }
+            .sidebar-logo { padding: 0 16px 16px; margin-bottom: 16px; }
+            .master-account { margin: 0 8px 12px; }
+            .nav-section { display: flex; flex-wrap: wrap; padding: 0 8px; gap: 4px; }
+            .nav-section-title { width: 100%; }
+            .nav-item { font-size: 0.8rem; padding: 8px 12px; }
+            .main-content { margin-left: 0; padding: 20px 12px; }
+            .stats-grid { grid-template-columns: 1fr; gap: 12px; }
             .grid-2 { grid-template-columns: 1fr; }
+            .top-bar { flex-direction: column; align-items: flex-start; }
+            .top-bar h2 { font-size: 1.5rem; }
+            table { display: block; overflow-x: auto; }
+            th, td { padding: 10px 12px; font-size: 0.8rem; }
+            .btn { padding: 8px 14px; font-size: 0.8rem; }
+            .btn-sm { padding: 5px 10px; font-size: 0.75rem; }
+            .modal { padding: 20px; max-width: 95%; }
+            .admin-container { flex-direction: column; }
+            .sidebar { box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        }
+        
+        /* PWA standalone mode adjustments */
+        @media all and (display-mode: standalone) {
+            body {
+                padding-top: env(safe-area-inset-top, 0px);
+                padding-bottom: env(safe-area-inset-bottom, 0px);
+                padding-left: env(safe-area-inset-left, 0px);
+                padding-right: env(safe-area-inset-right, 0px);
+            }
         }
     </style>
 </head>
@@ -343,7 +432,7 @@
         <h2>🔐 Admin Login</h2>
         <div class="form-group">
             <label>Enter Password</label>
-            <input type="password" class="form-input" id="authPassword" placeholder="Admin password">
+            <input type="password" class="form-input" id="authPassword" placeholder="Admin password" autocomplete="off">
         </div>
         <button class="btn btn-primary" onclick="authenticate()">Unlock</button>
         <p style="margin-top:12px;color:var(--grey);font-size:0.8rem;">Default password: <strong>admin123</strong> (change it in Settings)</p>
@@ -390,8 +479,10 @@
         <div id="dashboardView">
             <div class="top-bar">
                 <h2>📊 Dashboard Overview</h2>
-                <div style="display:flex;align-items:center;gap:20px;">
-                    <button class="download-btn" onclick="downloadApp()"><i class="fas fa-download"></i> Download App</button>
+                <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                    <button class="download-btn" id="installAppBtn" onclick="installApp()">
+                        <i class="fas fa-download"></i> Install App
+                    </button>
                     <div class="sync-status"><span class="sync-dot"></span> Live Sync Active</div>
                     <div class="admin-profile"><div class="admin-avatar">SC</div><span style="font-weight:600;">Master Admin</span></div>
                 </div>
@@ -403,7 +494,7 @@
             </div>
         </div>
 
-        <!-- Other views (loaded dynamically) -->
+        <!-- Other views loaded dynamically -->
         <div id="productsView" style="display:none;"></div>
         <div id="paymentsView" style="display:none;"></div>
         <div id="usersView" style="display:none;"></div>
@@ -422,12 +513,12 @@
         <div class="form-group">
             <label>New Price (KSH)</label>
             <div class="price-adjust">
-                <input type="number" class="form-input" id="newPrice" min="0">
+                <input type="number" class="form-input" id="newPrice" min="0" inputmode="numeric">
                 <button class="btn btn-warning" onclick="suggestMarketPrice()">📊 Suggest Market Price</button>
             </div>
             <div class="price-suggestion" id="priceSuggestion"></div>
         </div>
-        <div class="form-group"><label>Reason for Adjustment</label><textarea class="form-textarea" id="priceReason" rows="3"></textarea></div>
+        <div class="form-group"><label>Reason for Adjustment</label><textarea class="form-textarea" id="priceReason" rows="3" placeholder="Explain why the price needs adjustment..."></textarea></div>
         <button class="btn btn-primary" onclick="savePriceAdjustment()">💾 Save & Sync</button>
         <button class="btn btn-outline" onclick="closePriceModal()">Cancel</button>
     </div>
@@ -446,10 +537,41 @@
 </div>
 
 <script>
-    // ==================== FIXED & ENHANCED JAVASCRIPT ====================
+    // ==================== PWA INSTALLATION ====================
+    let deferredPrompt = null;
 
-    // ---------- APP DOWNLOAD ----------
-    function downloadApp() {
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        const installBtn = document.getElementById('installAppBtn');
+        if (installBtn) {
+            installBtn.style.display = 'inline-flex';
+            installBtn.innerHTML = '<i class="fas fa-download"></i> Install App';
+        }
+    });
+
+    function installApp() {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted the install prompt');
+                    const installBtn = document.getElementById('installAppBtn');
+                    if (installBtn) {
+                        installBtn.innerHTML = '<i class="fas fa-check"></i> Installed';
+                        installBtn.style.opacity = '0.6';
+                        installBtn.onclick = null;
+                    }
+                }
+                deferredPrompt = null;
+            });
+        } else {
+            // Fallback for browsers that don't support PWA install
+            downloadAsHTML();
+        }
+    }
+
+    function downloadAsHTML() {
         const html = document.documentElement.outerHTML;
         const blob = new Blob(['<!DOCTYPE html>\n' + html], { type: 'text/html' });
         const url = URL.createObjectURL(blob);
@@ -458,9 +580,15 @@
         a.download = 'secondchance_admin_panel.html';
         a.click();
         URL.revokeObjectURL(url);
+        alert('📱 App downloaded as HTML file.\n\nTo install on mobile:\n• iPhone: Open in Safari and tap Share > Add to Home Screen\n• Android: Open in Chrome and tap Menu > Add to Home Screen');
     }
 
-    // ---------- PASSWORD AUTH ----------
+    window.addEventListener('appinstalled', () => {
+        console.log('PWA was installed');
+        deferredPrompt = null;
+    });
+
+    // ==================== PASSWORD AUTH ====================
     const DEFAULT_PASSWORD = 'admin123';
 
     function ensureAdminPassword() {
@@ -483,12 +611,12 @@
         }
     }
 
-    // ---------- MASTER ACCOUNT (now reads from settings) ----------
+    // ==================== MASTER ACCOUNT ====================
     function getMasterPhone() {
         return adminData.settings.masterAccount || '0792091769';
     }
 
-    // ---------- DATA STORE (with all fixes) ----------
+    // ==================== DATA STORE ====================
     let adminData = loadAdminData();
 
     function loadAdminData() {
@@ -533,7 +661,7 @@
         updateMasterBalance();
     }
 
-    // ---------- CROSS-APP SYNC (FIXED: IDs, persistence) ----------
+    // ==================== CROSS-APP SYNC ====================
     function syncToMainApp() {
         const syncData = {
             approvedProducts: adminData.products.filter(p => p.status === 'approved'),
@@ -568,7 +696,6 @@
                     }
                 });
             }
-            // CRITICAL: persist after pull
             saveAdminData();
         } catch(e) {}
     }
@@ -583,14 +710,13 @@
             document.getElementById('masterPhoneDisplay').textContent = getMasterPhone();
     }
 
-    // Global master object
     const MASTER_ACCOUNT = {
         get phone() { return getMasterPhone(); },
         name: 'Master Admin',
         balance: 0
     };
 
-    // ---------- UNIQUE CONFIRMATION CODE ----------
+    // ==================== UNIQUE CONFIRMATION CODE ====================
     function generateConfirmationCode() {
         const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
         let code, exists;
@@ -602,7 +728,7 @@
         return code;
     }
 
-    // ---------- NAVIGATION (tracks current view) ----------
+    // ==================== NAVIGATION ====================
     let currentView = 'dashboard';
 
     function navigateTo(view) {
@@ -629,7 +755,7 @@
         }
     }
 
-    // ---------- DASHBOARD ----------
+    // ==================== DASHBOARD ====================
     function loadDashboard() {
         const pendingProducts = adminData.products.filter(p => p.status === 'pending').length;
         const pendingPayments = adminData.payments.filter(p => p.status === 'pending').length;
@@ -680,7 +806,7 @@
         saveAdminData();
     }
 
-    // ---------- PRODUCTS ----------
+    // ==================== PRODUCTS ====================
     let currentProductFilter = 'all';
 
     function loadProductsView(filterStatus = 'all') {
@@ -700,9 +826,11 @@
                         <button class="btn btn-danger btn-sm" onclick="loadProductsView('rejected')">Rejected</button>
                     </div>
                 </div>
-                <table><thead><tr><th>Product</th><th>Seller</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
-                    <tbody id="productsTableBody">${renderProductRows(filtered)}</tbody>
-                </table>
+                <div style="overflow-x:auto;">
+                    <table><thead><tr><th>Product</th><th>Seller</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
+                        <tbody id="productsTableBody">${renderProductRows(filtered)}</tbody>
+                    </table>
+                </div>
             </div>`;
     }
 
@@ -739,7 +867,7 @@
         if (product) { product.status = 'rejected'; addActivity('product_rejected', `Product "${product.title}" rejected: ${reason}`); saveAdminData(); loadProductsView(currentProductFilter); if (currentView === 'dashboard') loadDashboard(); }
     }
 
-    // ---------- PRICE ADJUSTMENT ----------
+    // ==================== PRICE ADJUSTMENT ====================
     function openPriceModal(productId) {
         const product = adminData.products.find(p => p.id === productId);
         if (!product) return;
@@ -777,7 +905,7 @@
         }
     }
 
-    // ---------- PAYMENTS ----------
+    // ==================== PAYMENTS ====================
     function loadPaymentsView() {
         document.getElementById('paymentsView').innerHTML = `
             <div class="top-bar"><h2>💳 Payment Verification</h2></div>
@@ -789,9 +917,11 @@
                         <button class="btn btn-success btn-sm" onclick="filterPayments('completed')">Completed</button>
                     </div>
                 </div>
-                <table><thead><tr><th>User</th><th>Phone</th><th>Amount</th><th>Method</th><th>Code</th><th>Status</th><th>Actions</th></tr></thead>
-                    <tbody id="paymentsTableBody">${renderPaymentRows(adminData.payments)}</tbody>
-                </table>
+                <div style="overflow-x:auto;">
+                    <table><thead><tr><th>User</th><th>Phone</th><th>Amount</th><th>Method</th><th>Code</th><th>Status</th><th>Actions</th></tr></thead>
+                        <tbody id="paymentsTableBody">${renderPaymentRows(adminData.payments)}</tbody>
+                    </table>
+                </div>
             </div>`;
     }
 
@@ -802,7 +932,7 @@
                 <td>${p.method?.toUpperCase() || '—'}</td><td><code style="color:var(--gold-light);">${p.code}</code></td>
                 <td><span class="status-badge status-${p.status}">${p.status.toUpperCase()}</span></td>
                 <td>${p.status === 'pending' ? `
-                    <button class="btn btn-primary btn-sm" onclick="verifyWithConfirmation('${p.id}')">🔐 Verify & Send Code</button>
+                    <button class="btn btn-primary btn-sm" onclick="verifyWithConfirmation('${p.id}')">🔐 Verify</button>
                     <button class="btn btn-danger btn-sm" onclick="rejectPayment('${p.id}')">✕</button>` : '<span style="color:var(--grey-light);">Completed</span>'}</td>
             </tr>`).join('') : '<tr><td colspan="7" class="empty-state"><i class="fas fa-money-bill-wave"></i><p>No payments yet.</p></td></tr>';
     }
@@ -856,19 +986,21 @@
         if (payment) { payment.status = 'rejected'; addActivity('payment_rejected', `Payment rejected for ${payment.userName}: ${reason}`); saveAdminData(); loadPaymentsView(); if (currentView === 'dashboard') loadDashboard(); }
     }
 
-    // ---------- USERS ----------
+    // ==================== USERS ====================
     function loadUsersView() {
         document.getElementById('usersView').innerHTML = `
             <div class="top-bar"><h2>👥 User Management</h2></div>
             <div class="table-container"><div class="table-header"><h3>All Users</h3></div>
-                <table><thead><tr><th>User</th><th>Phone</th><th>Role</th><th>Status</th><th>Confirmation</th><th>Actions</th></tr></thead>
-                    <tbody>${adminData.users.length ? adminData.users.map(u => `
-                        <tr><td><strong>${u.name}</strong></td><td>${u.phone || '—'}</td><td>${u.role || 'user'}</td>
-                        <td><span class="status-badge status-${u.sellerStatus === 'approved' ? 'approved' : 'pending'}">${u.sellerStatus}</span></td>
-                        <td>${u.confirmationCode ? '<code style="color:var(--gold);">${u.confirmationCode}</code>' : '—'}</td>
-                        <td><button class="btn btn-outline btn-sm" onclick="viewUser('${u.id}')">👁</button>
-                        <button class="btn btn-danger btn-sm" onclick="removeUser(${u.id})">🗑</button></td></tr>`).join('') : '<tr><td colspan="6" class="empty-state"><i class="fas fa-users"></i><p>No users registered yet</p></td></tr>'}</tbody>
-                </table>
+                <div style="overflow-x:auto;">
+                    <table><thead><tr><th>User</th><th>Phone</th><th>Role</th><th>Status</th><th>Confirmation</th><th>Actions</th></tr></thead>
+                        <tbody>${adminData.users.length ? adminData.users.map(u => `
+                            <tr><td><strong>${u.name}</strong></td><td>${u.phone || '—'}</td><td>${u.role || 'user'}</td>
+                            <td><span class="status-badge status-${u.sellerStatus === 'approved' ? 'approved' : 'pending'}">${u.sellerStatus}</span></td>
+                            <td>${u.confirmationCode ? '<code style="color:var(--gold);">${u.confirmationCode}</code>' : '—'}</td>
+                            <td><button class="btn btn-outline btn-sm" onclick="viewUser('${u.id}')">👁</button>
+                            <button class="btn btn-danger btn-sm" onclick="removeUser(${u.id})">🗑</button></td></tr>`).join('') : '<tr><td colspan="6" class="empty-state"><i class="fas fa-users"></i><p>No users registered yet</p></td></tr>'}</tbody>
+                    </table>
+                </div>
             </div>`;
     }
     function viewUser(userId) {
@@ -879,16 +1011,18 @@
         if (confirm('Remove this user?')) { adminData.users = adminData.users.filter(u => u.id !== id); saveAdminData(); loadUsersView(); if (currentView === 'dashboard') loadDashboard(); }
     }
 
-    // ---------- ORDERS, COMMISSIONS, SETTINGS, ACTIVITY (all working) ----------
+    // ==================== ORDERS, COMMISSIONS, SETTINGS, ACTIVITY ====================
     function loadOrdersView() {
         document.getElementById('ordersView').innerHTML = `
             <div class="top-bar"><h2>🛒 Order Monitoring</h2></div>
             <div class="table-container"><div class="table-header"><h3>All Orders</h3></div>
-                <table><thead><tr><th>Order ID</th><th>Buyer</th><th>Seller</th><th>Items</th><th>Total</th><th>Commission</th><th>Date</th></tr></thead>
-                    <tbody>${adminData.orders.length ? adminData.orders.map(o => `
-                        <tr><td>#${o.id}</td><td>${o.buyer}</td><td>${o.seller}</td><td>${o.items.join(', ')}</td>
-                        <td style="color:var(--gold);">KSH ${o.total.toLocaleString()}</td><td style="color:var(--success);">KSH ${o.commission}</td><td>${o.date}</td></tr>`).join('') : '<tr><td colspan="7" class="empty-state"><i class="fas fa-shopping-cart"></i><p>No orders yet</p></td></tr>'}</tbody>
-                </table>
+                <div style="overflow-x:auto;">
+                    <table><thead><tr><th>Order ID</th><th>Buyer</th><th>Seller</th><th>Items</th><th>Total</th><th>Commission</th><th>Date</th></tr></thead>
+                        <tbody>${adminData.orders.length ? adminData.orders.map(o => `
+                            <tr><td>#${o.id}</td><td>${o.buyer}</td><td>${o.seller}</td><td>${o.items.join(', ')}</td>
+                            <td style="color:var(--gold);">KSH ${o.total.toLocaleString()}</td><td style="color:var(--success);">KSH ${o.commission}</td><td>${o.date}</td></tr>`).join('') : '<tr><td colspan="7" class="empty-state"><i class="fas fa-shopping-cart"></i><p>No orders yet</p></td></tr>'}</tbody>
+                    </table>
+                </div>
             </div>`;
     }
     function loadCommissionsView() {
@@ -952,7 +1086,7 @@
         document.getElementById('pendingPaymentsBadge').style.display = payp > 0 ? 'inline' : 'none';
     }
 
-    // ---------- AUTO-SYNC (updates active view) ----------
+    // ==================== AUTO-SYNC ====================
     function autoSync() {
         pullFromMainApp();
         updateMasterBalance();
@@ -962,7 +1096,7 @@
     }
     setInterval(autoSync, 5000);
 
-    // ---------- INITIALISATION ----------
+    // ==================== INITIALISATION ====================
     document.addEventListener('DOMContentLoaded', () => {
         ensureAdminPassword();
         document.getElementById('authOverlay').style.display = 'flex';
@@ -972,9 +1106,26 @@
         // Close modals on outside click
         document.getElementById('priceModal').addEventListener('click', function(e) { if (e.target === this) closePriceModal(); });
         document.getElementById('confirmModal').addEventListener('click', function(e) { if (e.target === this) document.getElementById('confirmModal').style.display = 'none'; });
-        // Prevent closing auth overlay by clicking outside (forces password entry)
         document.getElementById('authOverlay').addEventListener('click', function(e) {});
         document.getElementById('authPassword').addEventListener('keyup', function(e) { if (e.key === 'Enter') authenticate(); });
+        
+        // Register service worker for PWA
+        if ('serviceWorker' in navigator) {
+            const swCode = `
+                self.addEventListener('install', (event) => {
+                    self.skipWaiting();
+                });
+                self.addEventListener('activate', (event) => {
+                    event.waitUntil(clients.claim());
+                });
+                self.addEventListener('fetch', (event) => {
+                    event.respondWith(fetch(event.request));
+                });
+            `;
+            const swBlob = new Blob([swCode], { type: 'application/javascript' });
+            const swUrl = URL.createObjectURL(swBlob);
+            navigator.serviceWorker.register(swUrl).catch(() => {});
+        }
     });
 </script>
 </body>
