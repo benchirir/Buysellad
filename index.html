@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* (All styles remain exactly as in the original – no visual changes) */
+        /* All original styles remain unchanged */
         :root {
             --black: #0a0a0a;
             --black-light: #1a1a1a;
@@ -205,10 +205,7 @@
             background: var(--success);
             animation: pulse 2s infinite;
         }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
         .admin-profile {
             display: flex;
             align-items: center;
@@ -254,315 +251,82 @@
         .stat-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 3px;
             background: linear-gradient(90deg, var(--gold), var(--brown));
             opacity: 0;
             transition: var(--transition);
         }
-        .stat-card:hover {
-            border-color: var(--gold);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-gold);
-        }
-        .stat-card:hover::before {
-            opacity: 1;
-        }
-        .stat-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 16px;
-        }
-        .stat-icon {
-            font-size: 1.8rem;
-        }
-        .stat-change {
-            font-size: 0.75rem;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
+        .stat-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: var(--shadow-gold); }
+        .stat-card:hover::before { opacity: 1; }
+        .stat-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+        .stat-icon { font-size: 1.8rem; }
+        .stat-change { font-size: 0.75rem; padding: 4px 10px; border-radius: 20px; font-weight: 600; letter-spacing: 0.5px; }
         .change-up { background: rgba(16,185,129,0.15); color: var(--success); }
         .change-down { background: rgba(239,68,68,0.15); color: var(--danger); }
-        .stat-value {
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin-bottom: 6px;
-            font-family: 'Playfair Display', serif;
-            color: var(--gold);
-        }
-        .stat-label {
-            color: var(--grey);
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        .table-container {
-            background: var(--black-surface);
-            border-radius: var(--radius);
-            border: 1px solid rgba(201,168,76,0.15);
-            overflow: hidden;
-            margin-bottom: 28px;
-        }
-        .table-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 24px;
-            border-bottom: 1px solid rgba(201,168,76,0.2);
-            background: rgba(201,168,76,0.03);
-        }
-        .table-header h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--gold-light);
-        }
-        .table-actions {
-            display: flex;
-            gap: 8px;
-        }
+        .stat-value { font-size: 2.2rem; font-weight: 800; margin-bottom: 6px; font-family: 'Playfair Display', serif; color: var(--gold); }
+        .stat-label { color: var(--grey); font-size: 0.85rem; font-weight: 500; }
+        .table-container { background: var(--black-surface); border-radius: var(--radius); border: 1px solid rgba(201,168,76,0.15); overflow: hidden; margin-bottom: 28px; }
+        .table-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid rgba(201,168,76,0.2); background: rgba(201,168,76,0.03); }
+        .table-header h3 { font-size: 1.1rem; font-weight: 600; color: var(--gold-light); }
+        .table-actions { display: flex; gap: 8px; }
         .btn {
-            padding: 10px 18px;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-family: inherit;
-            letter-spacing: 0.3px;
+            padding: 10px 18px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: var(--transition); display: flex; align-items: center; gap: 6px; font-family: inherit; letter-spacing: 0.3px;
         }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-            color: var(--black);
-            font-weight: 700;
-        }
-        .btn-primary:hover {
-            box-shadow: var(--shadow-gold);
-            transform: translateY(-1px);
-        }
+        .btn-primary { background: linear-gradient(135deg, var(--gold-dark), var(--gold)); color: var(--black); font-weight: 700; }
+        .btn-primary:hover { box-shadow: var(--shadow-gold); transform: translateY(-1px); }
         .btn-success { background: var(--success); color: white; }
         .btn-success:hover { filter: brightness(1.1); }
         .btn-warning { background: var(--warning); color: var(--black); font-weight: 700; }
         .btn-danger { background: var(--danger); color: white; }
         .btn-danger:hover { filter: brightness(1.1); }
-        .btn-outline {
-            border: 1px solid rgba(201,168,76,0.4);
-            background: transparent;
-            color: var(--gold-light);
-        }
-        .btn-outline:hover {
-            border-color: var(--gold);
-            background: rgba(201,168,76,0.1);
-        }
+        .btn-outline { border: 1px solid rgba(201,168,76,0.4); background: transparent; color: var(--gold-light); }
+        .btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.1); }
         .btn-sm { padding: 6px 12px; font-size: 0.8rem; }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th {
-            text-align: left;
-            padding: 14px 24px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--grey);
-            border-bottom: 1px solid rgba(201,168,76,0.2);
-            font-weight: 700;
-        }
-        td {
-            padding: 16px 24px;
-            border-bottom: 1px solid rgba(201,168,76,0.1);
-            font-size: 0.9rem;
-        }
-        tr:hover {
-            background: rgba(201,168,76,0.03);
-        }
-        .status-badge {
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; padding: 14px 24px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--grey); border-bottom: 1px solid rgba(201,168,76,0.2); font-weight: 700; }
+        td { padding: 16px 24px; border-bottom: 1px solid rgba(201,168,76,0.1); font-size: 0.9rem; }
+        tr:hover { background: rgba(201,168,76,0.03); }
+        .status-badge { padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.5px; }
         .status-pending { background: rgba(245,158,11,0.2); color: var(--warning); border: 1px solid rgba(245,158,11,0.3); }
         .status-approved { background: rgba(16,185,129,0.2); color: var(--success); border: 1px solid rgba(16,185,129,0.3); }
         .status-rejected { background: rgba(239,68,68,0.2); color: var(--danger); border: 1px solid rgba(239,68,68,0.3); }
         .status-completed { background: rgba(16,185,129,0.2); color: var(--success); border: 1px solid rgba(16,185,129,0.3); }
         .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.85);
-            backdrop-filter: blur(8px);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 1000; display: flex; align-items: center; justify-content: center;
         }
         .modal {
-            background: var(--black-surface);
-            border-radius: var(--radius);
-            padding: 32px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 85vh;
-            overflow-y: auto;
-            border: 1px solid rgba(201,168,76,0.3);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(201,168,76,0.1);
-            animation: modalSlide 0.3s ease;
+            background: var(--black-surface); border-radius: var(--radius); padding: 32px; max-width: 600px; width: 90%; max-height: 85vh; overflow-y: auto; border: 1px solid rgba(201,168,76,0.3); box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(201,168,76,0.1); animation: modalSlide 0.3s ease;
         }
-        @keyframes modalSlide {
-            from { opacity: 0; transform: translateY(30px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        .modal h2 {
-            margin-bottom: 24px;
-            font-size: 1.6rem;
-            font-family: 'Playfair Display', serif;
-            color: var(--gold);
-            letter-spacing: 0.5px;
-        }
-        .modal h3 {
-            margin: 20px 0 10px;
-            color: var(--grey-light);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 700;
-        }
+        @keyframes modalSlide { from { opacity: 0; transform: translateY(30px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .modal h2 { margin-bottom: 24px; font-size: 1.6rem; font-family: 'Playfair Display', serif; color: var(--gold); letter-spacing: 0.5px; }
+        .modal h3 { margin: 20px 0 10px; color: var(--grey-light); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
         .form-group { margin-bottom: 18px; }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--grey-light);
-            letter-spacing: 0.3px;
-        }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: var(--grey-light); letter-spacing: 0.3px; }
         .form-input, .form-select, .form-textarea {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid rgba(201,168,76,0.3);
-            border-radius: 8px;
-            background: var(--black-light);
-            color: var(--white);
-            font-family: inherit;
-            font-size: 0.9rem;
-            transition: var(--transition);
+            width: 100%; padding: 12px 16px; border: 1px solid rgba(201,168,76,0.3); border-radius: 8px; background: var(--black-light); color: var(--white); font-family: inherit; font-size: 0.9rem; transition: var(--transition);
         }
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
-            outline: none;
-            border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
-        }
-        .price-adjust {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-        .price-adjust input {
-            width: 140px;
-        }
-        .price-suggestion {
-            font-size: 0.8rem;
-            color: var(--gold-light);
-            margin-top: 6px;
-            font-weight: 500;
-        }
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        .activity-log {
-            max-height: 450px;
-            overflow-y: auto;
-        }
-        .activity-item {
-            display: flex;
-            gap: 14px;
-            padding: 14px 0;
-            border-bottom: 1px solid rgba(201,168,76,0.1);
-            font-size: 0.85rem;
-            align-items: center;
-        }
-        .activity-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-        }
-        .activity-time {
-            color: var(--grey);
-            font-size: 0.75rem;
-            margin-top: 4px;
-        }
-        .search-box {
-            display: flex;
-            align-items: center;
-            background: var(--black-light);
-            border: 1px solid rgba(201,168,76,0.3);
-            border-radius: 8px;
-            padding: 0 14px;
-            transition: var(--transition);
-        }
-        .search-box:focus-within {
-            border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
-        }
-        .search-box input {
-            border: none;
-            background: transparent;
-            color: var(--white);
-            padding: 10px;
-            flex: 1;
-            outline: none;
-            font-family: inherit;
-        }
-        .empty-state {
-            text-align: center;
-            padding: 50px;
-            color: var(--grey);
-        }
-        .empty-state i {
-            font-size: 3.5rem;
-            margin-bottom: 16px;
-            color: var(--gold-dark);
-        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.1); }
+        .price-adjust { display: flex; gap: 10px; align-items: center; }
+        .price-adjust input { width: 140px; }
+        .price-suggestion { font-size: 0.8rem; color: var(--gold-light); margin-top: 6px; font-weight: 500; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .activity-log { max-height: 450px; overflow-y: auto; }
+        .activity-item { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid rgba(201,168,76,0.1); font-size: 0.85rem; align-items: center; }
+        .activity-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
+        .activity-time { color: var(--grey); font-size: 0.75rem; margin-top: 4px; }
+        .search-box { display: flex; align-items: center; background: var(--black-light); border: 1px solid rgba(201,168,76,0.3); border-radius: 8px; padding: 0 14px; transition: var(--transition); }
+        .search-box:focus-within { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.1); }
+        .search-box input { border: none; background: transparent; color: var(--white); padding: 10px; flex: 1; outline: none; font-family: inherit; }
+        .empty-state { text-align: center; padding: 50px; color: var(--grey); }
+        .empty-state i { font-size: 3.5rem; margin-bottom: 16px; color: var(--gold-dark); }
         .confirmation-code {
-            font-family: 'Courier New', monospace;
-            background: var(--black-light);
-            padding: 10px 16px;
-            border-radius: 8px;
-            color: var(--gold);
-            font-size: 1rem;
-            letter-spacing: 2px;
-            text-align: center;
-            border: 1px solid rgba(201,168,76,0.3);
-            font-weight: 700;
+            font-family: 'Courier New', monospace; background: var(--black-light); padding: 10px 16px; border-radius: 8px; color: var(--gold); font-size: 1rem; letter-spacing: 2px; text-align: center; border: 1px solid rgba(201,168,76,0.3); font-weight: 700;
         }
         .download-btn {
-            background: transparent;
-            border: 1px solid var(--gold-dark);
-            color: var(--gold);
-            padding: 8px 18px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: var(--transition);
+            background: transparent; border: 1px solid var(--gold-dark); color: var(--gold); padding: 8px 18px; border-radius: 8px; cursor: pointer; transition: var(--transition);
         }
-        .download-btn:hover {
-            background: rgba(201,168,76,0.2);
-        }
+        .download-btn:hover { background: rgba(201,168,76,0.2); }
         @media (max-width: 768px) {
             .sidebar { width: 220px; }
             .main-content { margin-left: 220px; padding: 20px; }
@@ -573,16 +337,16 @@
 </head>
 <body>
 
-<!-- Password overlay (hidden by default) -->
+<!-- PASSWORD GATE -->
 <div class="modal-overlay" id="authOverlay" style="display:none;">
     <div class="modal">
-        <h2>🔐 Admin Authorisation</h2>
+        <h2>🔐 Admin Login</h2>
         <div class="form-group">
             <label>Enter Password</label>
             <input type="password" class="form-input" id="authPassword" placeholder="Admin password">
         </div>
         <button class="btn btn-primary" onclick="authenticate()">Unlock</button>
-        <p style="margin-top:12px;color:var(--grey);font-size:0.8rem;">Default password: admin123</p>
+        <p style="margin-top:12px;color:var(--grey);font-size:0.8rem;">Default password: <strong>admin123</strong> (change it in Settings)</p>
     </div>
 </div>
 
@@ -602,70 +366,44 @@
 
         <div class="nav-section">
             <div class="nav-section-title">Main</div>
-            <div class="nav-item active" onclick="navigateTo('dashboard')">
-                <i class="fas fa-th-large"></i> Dashboard
-            </div>
-            <div class="nav-item" onclick="navigateTo('products')">
-                <i class="fas fa-box"></i> Products
-                <span class="nav-badge" id="pendingProductsBadge">0</span>
-            </div>
-            <div class="nav-item" onclick="navigateTo('payments')">
-                <i class="fas fa-money-bill-wave"></i> Payments
-                <span class="nav-badge" id="pendingPaymentsBadge">0</span>
-            </div>
+            <div class="nav-item active" onclick="navigateTo('dashboard')"><i class="fas fa-th-large"></i> Dashboard</div>
+            <div class="nav-item" onclick="navigateTo('products')"><i class="fas fa-box"></i> Products <span class="nav-badge" id="pendingProductsBadge">0</span></div>
+            <div class="nav-item" onclick="navigateTo('payments')"><i class="fas fa-money-bill-wave"></i> Payments <span class="nav-badge" id="pendingPaymentsBadge">0</span></div>
         </div>
 
         <div class="nav-section">
             <div class="nav-section-title">Management</div>
-            <div class="nav-item" onclick="navigateTo('users')">
-                <i class="fas fa-users"></i> Users
-            </div>
-            <div class="nav-item" onclick="navigateTo('orders')">
-                <i class="fas fa-shopping-cart"></i> Orders
-            </div>
-            <div class="nav-item" onclick="navigateTo('commissions')">
-                <i class="fas fa-percent"></i> Commissions
-            </div>
+            <div class="nav-item" onclick="navigateTo('users')"><i class="fas fa-users"></i> Users</div>
+            <div class="nav-item" onclick="navigateTo('orders')"><i class="fas fa-shopping-cart"></i> Orders</div>
+            <div class="nav-item" onclick="navigateTo('commissions')"><i class="fas fa-percent"></i> Commissions</div>
         </div>
 
         <div class="nav-section">
             <div class="nav-section-title">Settings</div>
-            <div class="nav-item" onclick="navigateTo('settings')">
-                <i class="fas fa-cog"></i> Platform Settings
-            </div>
-            <div class="nav-item" onclick="navigateTo('activity')">
-                <i class="fas fa-history"></i> Activity Log
-            </div>
+            <div class="nav-item" onclick="navigateTo('settings')"><i class="fas fa-cog"></i> Platform Settings</div>
+            <div class="nav-item" onclick="navigateTo('activity')"><i class="fas fa-history"></i> Activity Log</div>
         </div>
     </aside>
 
-    <!-- Main Content -->
     <main class="main-content" id="mainContent">
+        <!-- Dashboard View -->
         <div id="dashboardView">
             <div class="top-bar">
                 <h2>📊 Dashboard Overview</h2>
                 <div style="display:flex;align-items:center;gap:20px;">
                     <button class="download-btn" onclick="downloadApp()"><i class="fas fa-download"></i> Download App</button>
-                    <div class="sync-status">
-                        <span class="sync-dot"></span>
-                        Live Sync Active
-                    </div>
-                    <div class="admin-profile">
-                        <div class="admin-avatar">SC</div>
-                        <span style="font-weight:600;">Master Admin</span>
-                    </div>
+                    <div class="sync-status"><span class="sync-dot"></span> Live Sync Active</div>
+                    <div class="admin-profile"><div class="admin-avatar">SC</div><span style="font-weight:600;">Master Admin</span></div>
                 </div>
             </div>
-
             <div class="stats-grid" id="statsGrid"></div>
             <div class="table-container">
-                <div class="table-header">
-                    <h3>Recent Activity</h3>
-                </div>
+                <div class="table-header"><h3>Recent Activity</h3></div>
                 <div class="activity-log" id="recentActivity"></div>
             </div>
         </div>
 
+        <!-- Other views (loaded dynamically) -->
         <div id="productsView" style="display:none;"></div>
         <div id="paymentsView" style="display:none;"></div>
         <div id="usersView" style="display:none;"></div>
@@ -680,10 +418,7 @@
 <div class="modal-overlay" id="priceModal" style="display:none;">
     <div class="modal">
         <h2>💰 Adjust Product Price</h2>
-        <div class="form-group">
-            <label>Current Price</label>
-            <input type="text" class="form-input" id="currentPriceDisplay" disabled>
-        </div>
+        <div class="form-group"><label>Current Price</label><input type="text" class="form-input" id="currentPriceDisplay" disabled></div>
         <div class="form-group">
             <label>New Price (KSH)</label>
             <div class="price-adjust">
@@ -692,10 +427,7 @@
             </div>
             <div class="price-suggestion" id="priceSuggestion"></div>
         </div>
-        <div class="form-group">
-            <label>Reason for Adjustment</label>
-            <textarea class="form-textarea" id="priceReason" placeholder="Explain why the price needs adjustment..." rows="3"></textarea>
-        </div>
+        <div class="form-group"><label>Reason for Adjustment</label><textarea class="form-textarea" id="priceReason" rows="3"></textarea></div>
         <button class="btn btn-primary" onclick="savePriceAdjustment()">💾 Save & Sync</button>
         <button class="btn btn-outline" onclick="closePriceModal()">Cancel</button>
     </div>
@@ -732,7 +464,6 @@
     const DEFAULT_PASSWORD = 'admin123';
 
     function ensureAdminPassword() {
-        // If no password set, initialise with default
         if (!adminData.settings.adminPassword) {
             adminData.settings.adminPassword = DEFAULT_PASSWORD;
         }
@@ -743,7 +474,6 @@
         if (input === adminData.settings.adminPassword) {
             document.getElementById('authOverlay').style.display = 'none';
             document.getElementById('adminContainer').style.display = 'flex';
-            // Proceed with normal initialisation
             loadDashboard();
             updateAllBadges();
             updateMasterBalance();
@@ -758,7 +488,7 @@
         return adminData.settings.masterAccount || '0792091769';
     }
 
-    // ---------- DATA STORE (unchanged structure, but enhanced sync) ----------
+    // ---------- DATA STORE (with all fixes) ----------
     let adminData = loadAdminData();
 
     function loadAdminData() {
@@ -771,26 +501,6 @@
 
     function initializeFreshData() {
         return {
-            products: [...], // (same product data as original)
-            payments: [],
-            users: [],
-            orders: [],
-            activityLog: [],
-            settings: {
-                registrationFee: 350,
-                lowCommission: 3,
-                highCommission: 5,
-                platformStatus: 'active',
-                masterAccount: '0792091769',
-                adminPassword: DEFAULT_PASSWORD  // NEW
-            },
-            currentPriceEdit: null
-        };
-    }
-
-    // Pre-fill products to keep the original demonstration data
-    function initializeFreshData() {
-        const data = {
             products: [
                 { id: 1, title: 'Samsung Double Door Fridge', category: 'kitchen', price: 45000, condition: 'good', seller: 'Jane Home', status: 'approved', listedDate: '2024-01-15' },
                 { id: 2, title: 'Premium Cookware Set', category: 'kitchen', price: 8500, condition: 'like-new', seller: 'Mike Chef', status: 'approved', listedDate: '2024-01-16' },
@@ -815,7 +525,6 @@
             },
             currentPriceEdit: null
         };
-        return data;
     }
 
     function saveAdminData() {
@@ -824,7 +533,7 @@
         updateMasterBalance();
     }
 
-    // ---------- CROSS-APP SYNCHRONIZATION (FIXED) ----------
+    // ---------- CROSS-APP SYNC (FIXED: IDs, persistence) ----------
     function syncToMainApp() {
         const syncData = {
             approvedProducts: adminData.products.filter(p => p.status === 'approved'),
@@ -840,14 +549,11 @@
     function pullFromMainApp() {
         const mainData = localStorage.getItem('secondchance_main_data');
         if (!mainData) return;
-
         try {
             const parsed = JSON.parse(mainData);
             if (parsed.newPayments) {
                 parsed.newPayments.forEach(p => {
-                    // ensure unique ID
                     if (!p.id) p.id = 'pm_' + Date.now() + '_' + Math.random().toString(36).substr(2,6);
-                    // ensure phone and userId exist for linking
                     if (!p.phone) p.phone = p.userPhone || '';
                     if (!p.userId) p.userId = p.userID || '';
                     if (!adminData.payments.find(ap => ap.code === p.code)) {
@@ -862,67 +568,51 @@
                     }
                 });
             }
-            // CRITICAL FIX: persist after pull
+            // CRITICAL: persist after pull
             saveAdminData();
         } catch(e) {}
     }
 
     function updateMasterBalance() {
-        const masterPhone = getMasterPhone();
-        const totalFees = adminData.payments
-            .filter(p => p.status === 'completed')
-            .reduce((sum, p) => sum + p.amount, 0);
+        const totalFees = adminData.payments.filter(p => p.status === 'completed').reduce((sum, p) => sum + p.amount, 0);
         const totalCommissions = adminData.orders.reduce((sum, o) => sum + o.commission, 0);
         MASTER_ACCOUNT.balance = totalFees + totalCommissions;
-        if (document.getElementById('masterBalance')) {
+        if (document.getElementById('masterBalance'))
             document.getElementById('masterBalance').textContent = `KSH ${MASTER_ACCOUNT.balance.toLocaleString()}`;
-        }
-        if (document.getElementById('masterPhoneDisplay')) {
-            document.getElementById('masterPhoneDisplay').textContent = masterPhone;
-        }
+        if (document.getElementById('masterPhoneDisplay'))
+            document.getElementById('masterPhoneDisplay').textContent = getMasterPhone();
     }
 
-    // Global master object for display (now syncs with settings)
+    // Global master object
     const MASTER_ACCOUNT = {
         get phone() { return getMasterPhone(); },
         name: 'Master Admin',
         balance: 0
     };
 
-    // Unique confirmation code generator (now checks collisions)
+    // ---------- UNIQUE CONFIRMATION CODE ----------
     function generateConfirmationCode() {
         const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-        let code;
-        let exists = true;
-        while (exists) {
+        let code, exists;
+        do {
             code = 'SC-';
-            for (let i = 0; i < 8; i++) {
-                code += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            exists = adminData.payments.some(p => p.confirmationCode === code) ||
-                     adminData.users.some(u => u.confirmationCode === code);
-        }
+            for (let i = 0; i < 8; i++) code += chars.charAt(Math.floor(Math.random() * chars.length));
+            exists = adminData.payments.some(p => p.confirmationCode === code) || adminData.users.some(u => u.confirmationCode === code);
+        } while (exists);
         return code;
     }
 
-    // ---------- NAVIGATION (with current view tracking for auto-sync) ----------
+    // ---------- NAVIGATION (tracks current view) ----------
     let currentView = 'dashboard';
 
     function navigateTo(view) {
         currentView = view;
-        const views = ['dashboard', 'products', 'payments', 'users', 'orders', 'commissions', 'settings', 'activity'];
-        views.forEach(v => {
-            const el = document.getElementById(v + 'View');
-            if (el) el.style.display = 'none';
-        });
-
+        document.querySelectorAll('[id$="View"]').forEach(el => el.style.display = 'none');
         const targetView = document.getElementById(view + 'View');
         if (targetView) targetView.style.display = 'block';
-
         document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
         const clickedNav = document.querySelector(`.nav-item[onclick*="${view}"]`);
         if (clickedNav) clickedNav.classList.add('active');
-
         loadViewContent(view);
     }
 
@@ -948,47 +638,16 @@
         const approvedSellers = adminData.users.filter(u => u.sellerStatus === 'approved').length;
 
         document.getElementById('statsGrid').innerHTML = `
-            <div class="stat-card">
-                <div class="stat-header">
-                    <span class="stat-icon">📦</span>
-                    <span class="stat-change change-up">${pendingProducts} pending</span>
-                </div>
-                <div class="stat-value">${adminData.products.length}</div>
-                <div class="stat-label">Total Products</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-header">
-                    <span class="stat-icon">💳</span>
-                    <span class="stat-change ${pendingPayments > 0 ? 'change-down' : 'change-up'}">${pendingPayments} pending</span>
-                </div>
-                <div class="stat-value">${adminData.payments.length}</div>
-                <div class="stat-label">Payment Requests</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-header">
-                    <span class="stat-icon">💰</span>
-                    <span class="stat-change change-up">Master: ${getMasterPhone()}</span>
-                </div>
-                <div class="stat-value">KSH ${totalRevenue.toLocaleString()}</div>
-                <div class="stat-label">Total Revenue</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-header">
-                    <span class="stat-icon">👥</span>
-                    <span class="stat-change change-up">${approvedSellers} sellers</span>
-                </div>
-                <div class="stat-value">${adminData.users.length}</div>
-                <div class="stat-label">Registered Users</div>
-            </div>
+            <div class="stat-card"><div class="stat-header"><span class="stat-icon">📦</span><span class="stat-change change-up">${pendingProducts} pending</span></div><div class="stat-value">${adminData.products.length}</div><div class="stat-label">Total Products</div></div>
+            <div class="stat-card"><div class="stat-header"><span class="stat-icon">💳</span><span class="stat-change ${pendingPayments > 0 ? 'change-down' : 'change-up'}">${pendingPayments} pending</span></div><div class="stat-value">${adminData.payments.length}</div><div class="stat-label">Payment Requests</div></div>
+            <div class="stat-card"><div class="stat-header"><span class="stat-icon">💰</span><span class="stat-change change-up">Master: ${getMasterPhone()}</span></div><div class="stat-value">KSH ${totalRevenue.toLocaleString()}</div><div class="stat-label">Total Revenue</div></div>
+            <div class="stat-card"><div class="stat-header"><span class="stat-icon">👥</span><span class="stat-change change-up">${approvedSellers} sellers</span></div><div class="stat-value">${adminData.users.length}</div><div class="stat-label">Registered Users</div></div>
         `;
 
         document.getElementById('recentActivity').innerHTML = adminData.activityLog.slice(-8).reverse().map(log => `
             <div class="activity-item">
                 <div class="activity-icon" style="background:${getActivityColor(log.type)}">${getActivityIcon(log.type)}</div>
-                <div>
-                    <div>${log.message}</div>
-                    <div class="activity-time">${log.time}</div>
-                </div>
+                <div><div>${log.message}</div><div class="activity-time">${log.time}</div></div>
             </div>
         `).join('') || '<div class="empty-state"><i class="fas fa-history"></i><p>No activity recorded yet</p></div>';
 
@@ -996,17 +655,12 @@
         updateMasterBalance();
     }
 
-    // Activity helpers – fixed missing types
     function getActivityColor(type) {
         const colors = {
-            product_approved: 'rgba(16,185,129,0.3)',
-            product_rejected: 'rgba(239,68,68,0.3)',
-            payment_verified: 'rgba(201,168,76,0.3)',
-            payment_confirmed: 'rgba(201,168,76,0.4)',
-            payment_rejected: 'rgba(239,68,68,0.3)',
-            user_registered: 'rgba(59,130,246,0.3)',
-            price_adjusted: 'rgba(245,158,11,0.3)',
-            commission_updated: 'rgba(139,92,246,0.3)',
+            product_approved: 'rgba(16,185,129,0.3)', product_rejected: 'rgba(239,68,68,0.3)',
+            payment_verified: 'rgba(201,168,76,0.3)', payment_confirmed: 'rgba(201,168,76,0.4)',
+            payment_rejected: 'rgba(239,68,68,0.3)', user_registered: 'rgba(59,130,246,0.3)',
+            price_adjusted: 'rgba(245,158,11,0.3)', commission_updated: 'rgba(139,92,246,0.3)',
             settings_updated: 'rgba(107,114,128,0.3)'
         };
         return colors[type] || 'rgba(107,114,128,0.3)';
@@ -1014,14 +668,8 @@
 
     function getActivityIcon(type) {
         const icons = {
-            product_approved: '✓',
-            product_rejected: '✕',
-            payment_verified: '$',
-            payment_confirmed: '🔐',
-            payment_rejected: '✕',
-            user_registered: '👤',
-            price_adjusted: '💰',
-            commission_updated: '📊',
+            product_approved: '✓', product_rejected: '✕', payment_verified: '$', payment_confirmed: '🔐',
+            payment_rejected: '✕', user_registered: '👤', price_adjusted: '💰', commission_updated: '📊',
             settings_updated: '⚙️'
         };
         return icons[type] || '•';
@@ -1032,25 +680,19 @@
         saveAdminData();
     }
 
-    // ---------- PRODUCTS VIEW (with search that respects filter) ----------
+    // ---------- PRODUCTS ----------
     let currentProductFilter = 'all';
 
     function loadProductsView(filterStatus = 'all') {
         currentProductFilter = filterStatus;
-        const productsView = document.getElementById('productsView');
         const filtered = filterStatus === 'all' ? adminData.products : adminData.products.filter(p => p.status === filterStatus);
-
-        productsView.innerHTML = `
+        document.getElementById('productsView').innerHTML = `
             <div class="top-bar">
                 <h2>📦 Product Management</h2>
-                <div class="search-box">
-                    <i class="fas fa-search" style="color:var(--gold);"></i>
-                    <input type="text" placeholder="Search products..." id="productSearchInput" oninput="filterProductsSearch(this.value)">
-                </div>
+                <div class="search-box"><i class="fas fa-search" style="color:var(--gold);"></i><input type="text" placeholder="Search products..." id="productSearchInput" oninput="filterProductsSearch(this.value)"></div>
             </div>
             <div class="table-container">
-                <div class="table-header">
-                    <h3>All Products</h3>
+                <div class="table-header"><h3>All Products</h3>
                     <div class="table-actions">
                         <button class="btn btn-outline btn-sm" onclick="loadProductsView('all')">All</button>
                         <button class="btn btn-warning btn-sm" onclick="loadProductsView('pending')">Pending</button>
@@ -1058,14 +700,10 @@
                         <button class="btn btn-danger btn-sm" onclick="loadProductsView('rejected')">Rejected</button>
                     </div>
                 </div>
-                <table>
-                    <thead><tr><th>Product</th><th>Seller</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
-                    <tbody id="productsTableBody">
-                        ${renderProductRows(filtered)}
-                    </tbody>
+                <table><thead><tr><th>Product</th><th>Seller</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
+                    <tbody id="productsTableBody">${renderProductRows(filtered)}</tbody>
                 </table>
-            </div>
-        `;
+            </div>`;
     }
 
     function renderProductRows(products) {
@@ -1076,50 +714,32 @@
                 <td><strong style="color:var(--gold);">KSH ${p.price.toLocaleString()}</strong></td>
                 <td><span class="status-badge status-${p.status}">${p.status.toUpperCase()}</span></td>
                 <td>
-                    <button class="btn btn-success btn-sm" onclick="approveProduct(${p.id})" title="Approve">✓</button>
-                    <button class="btn btn-danger btn-sm" onclick="rejectProduct(${p.id})" title="Reject">✕</button>
-                    <button class="btn btn-warning btn-sm" onclick="openPriceModal(${p.id})" title="Adjust Price">💲</button>
+                    <button class="btn btn-success btn-sm" onclick="approveProduct(${p.id})">✓</button>
+                    <button class="btn btn-danger btn-sm" onclick="rejectProduct(${p.id})">✕</button>
+                    <button class="btn btn-warning btn-sm" onclick="openPriceModal(${p.id})">💲</button>
                 </td>
-            </tr>
-        `).join('') : '<tr><td colspan="5" class="empty-state">No products found</td></tr>';
+            </tr>`).join('') : '<tr><td colspan="5" class="empty-state">No products found</td></tr>';
     }
 
     function filterProductsSearch(search) {
         const term = search.toLowerCase();
-        // Apply current filter first, then search
         let base = currentProductFilter === 'all' ? adminData.products : adminData.products.filter(p => p.status === currentProductFilter);
-        const filtered = base.filter(p =>
-            p.title.toLowerCase().includes(term) ||
-            p.seller.toLowerCase().includes(term)
-        );
+        const filtered = base.filter(p => p.title.toLowerCase().includes(term) || p.seller.toLowerCase().includes(term));
         document.getElementById('productsTableBody').innerHTML = renderProductRows(filtered);
     }
 
     function approveProduct(id) {
         const product = adminData.products.find(p => p.id === id);
-        if (product) {
-            product.status = 'approved';
-            addActivity('product_approved', `Product "${product.title}" approved`);
-            saveAdminData();
-            loadProductsView(currentProductFilter);
-            if (currentView === 'dashboard') loadDashboard();
-        }
+        if (product) { product.status = 'approved'; addActivity('product_approved', `Product "${product.title}" approved`); saveAdminData(); loadProductsView(currentProductFilter); if (currentView === 'dashboard') loadDashboard(); }
     }
-
     function rejectProduct(id) {
         const reason = prompt('Rejection reason:');
         if (!reason) return;
         const product = adminData.products.find(p => p.id === id);
-        if (product) {
-            product.status = 'rejected';
-            addActivity('product_rejected', `Product "${product.title}" rejected: ${reason}`);
-            saveAdminData();
-            loadProductsView(currentProductFilter);
-            if (currentView === 'dashboard') loadDashboard();
-        }
+        if (product) { product.status = 'rejected'; addActivity('product_rejected', `Product "${product.title}" rejected: ${reason}`); saveAdminData(); loadProductsView(currentProductFilter); if (currentView === 'dashboard') loadDashboard(); }
     }
 
-    // ---------- PRICE ADJUSTMENT (unchanged but already allows admin to change prices) ----------
+    // ---------- PRICE ADJUSTMENT ----------
     function openPriceModal(productId) {
         const product = adminData.products.find(p => p.id === productId);
         if (!product) return;
@@ -1130,27 +750,16 @@
         document.getElementById('priceSuggestion').innerHTML = '';
         document.getElementById('priceModal').style.display = 'flex';
     }
-
-    function closePriceModal() {
-        document.getElementById('priceModal').style.display = 'none';
-        adminData.currentPriceEdit = null;
-    }
-
+    function closePriceModal() { document.getElementById('priceModal').style.display = 'none'; adminData.currentPriceEdit = null; }
     function suggestMarketPrice() {
         const product = adminData.products.find(p => p.id === adminData.currentPriceEdit);
         if (!product) return;
         const categoryProducts = adminData.products.filter(p => p.category === product.category && p.id !== product.id);
-        const avgPrice = categoryProducts.length > 0
-            ? categoryProducts.reduce((sum, p) => sum + p.price, 0) / categoryProducts.length
-            : product.price * 0.8;
+        const avgPrice = categoryProducts.length ? categoryProducts.reduce((sum, p) => sum + p.price, 0) / categoryProducts.length : product.price * 0.8;
         const suggestedPrice = Math.round(avgPrice / 100) * 100;
         document.getElementById('newPrice').value = suggestedPrice;
-        document.getElementById('priceSuggestion').innerHTML = `
-            💡 <strong>Market Price Suggestion:</strong> KSH ${suggestedPrice.toLocaleString()}
-            (Average of ${categoryProducts.length} similar items in ${product.category})
-        `;
+        document.getElementById('priceSuggestion').innerHTML = `💡 <strong>Market Price Suggestion:</strong> KSH ${suggestedPrice.toLocaleString()} (Average of ${categoryProducts.length} similar items in ${product.category})`;
     }
-
     function savePriceAdjustment() {
         const productId = adminData.currentPriceEdit;
         const newPrice = parseFloat(document.getElementById('newPrice').value);
@@ -1168,47 +777,34 @@
         }
     }
 
-    // ---------- PAYMENTS VIEW (with ID-safe buttons) ----------
+    // ---------- PAYMENTS ----------
     function loadPaymentsView() {
-        const paymentsView = document.getElementById('paymentsView');
-        paymentsView.innerHTML = `
+        document.getElementById('paymentsView').innerHTML = `
             <div class="top-bar"><h2>💳 Payment Verification</h2></div>
             <div class="table-container">
-                <div class="table-header">
-                    <h3>Registration Fee Payments</h3>
+                <div class="table-header"><h3>Registration Fee Payments</h3>
                     <div class="table-actions">
                         <button class="btn btn-outline btn-sm" onclick="loadPaymentsView()">All</button>
                         <button class="btn btn-warning btn-sm" onclick="filterPayments('pending')">Pending</button>
                         <button class="btn btn-success btn-sm" onclick="filterPayments('completed')">Completed</button>
                     </div>
                 </div>
-                <table>
-                    <thead><tr><th>User</th><th>Phone</th><th>Amount</th><th>Method</th><th>Code</th><th>Status</th><th>Actions</th></tr></thead>
-                    <tbody id="paymentsTableBody">
-                        ${renderPaymentRows(adminData.payments)}
-                    </tbody>
+                <table><thead><tr><th>User</th><th>Phone</th><th>Amount</th><th>Method</th><th>Code</th><th>Status</th><th>Actions</th></tr></thead>
+                    <tbody id="paymentsTableBody">${renderPaymentRows(adminData.payments)}</tbody>
                 </table>
-            </div>
-        `;
+            </div>`;
     }
 
     function renderPaymentRows(payments) {
         return payments.length ? payments.map(p => `
             <tr>
-                <td><strong>${p.userName}</strong></td>
-                <td>${p.phone || '—'}</td>
-                <td style="color:var(--gold);font-weight:600;">KSH ${p.amount}</td>
-                <td>${p.method?.toUpperCase() || '—'}</td>
-                <td><code style="color:var(--gold-light);">${p.code}</code></td>
+                <td><strong>${p.userName}</strong></td><td>${p.phone || '—'}</td><td style="color:var(--gold);font-weight:600;">KSH ${p.amount}</td>
+                <td>${p.method?.toUpperCase() || '—'}</td><td><code style="color:var(--gold-light);">${p.code}</code></td>
                 <td><span class="status-badge status-${p.status}">${p.status.toUpperCase()}</span></td>
-                <td>
-                    ${p.status === 'pending' ? `
-                        <button class="btn btn-primary btn-sm" onclick="verifyWithConfirmation('${p.id}')">🔐 Verify & Send Code</button>
-                        <button class="btn btn-danger btn-sm" onclick="rejectPayment('${p.id}')">✕</button>
-                    ` : '<span style="color:var(--grey-light);">Completed</span>'}
-                </td>
-            </tr>
-        `).join('') : '<tr><td colspan="7" class="empty-state"><i class="fas fa-money-bill-wave"></i><p>No payments yet.</p></td></tr>';
+                <td>${p.status === 'pending' ? `
+                    <button class="btn btn-primary btn-sm" onclick="verifyWithConfirmation('${p.id}')">🔐 Verify & Send Code</button>
+                    <button class="btn btn-danger btn-sm" onclick="rejectPayment('${p.id}')">✕</button>` : '<span style="color:var(--grey-light);">Completed</span>'}</td>
+            </tr>`).join('') : '<tr><td colspan="7" class="empty-state"><i class="fas fa-money-bill-wave"></i><p>No payments yet.</p></td></tr>';
     }
 
     function filterPayments(status) {
@@ -1216,142 +812,85 @@
         document.getElementById('paymentsTableBody').innerHTML = renderPaymentRows(filtered);
     }
 
-    // ---------- CONFIRMATION CODE (with uniqueness, fixed user linking) ----------
     let currentPaymentToVerify = null;
-
     function verifyWithConfirmation(paymentId) {
-        const payment = adminData.payments.find(p => p.id == paymentId); // loose equality to handle string/number
+        const payment = adminData.payments.find(p => p.id == paymentId);
         if (!payment) return;
         currentPaymentToVerify = paymentId;
-        const code = generateConfirmationCode();
-        document.getElementById('generatedCode').textContent = code;
+        document.getElementById('generatedCode').textContent = generateConfirmationCode();
         document.getElementById('confirmModal').style.display = 'flex';
     }
-
     function copyAndConfirm() {
         if (!currentPaymentToVerify) return;
         const payment = adminData.payments.find(p => p.id == currentPaymentToVerify);
         if (!payment) return;
         const code = document.getElementById('generatedCode').textContent;
-
         navigator.clipboard.writeText(code).catch(() => {});
-
         payment.status = 'completed';
         payment.confirmationCode = code;
         payment.verifiedAt = new Date().toISOString();
         payment.receivedBy = getMasterPhone();
 
-        // Fixed user linking: ensure we use phone and a fallback ID
         let user = adminData.users.find(u => (u.phone && u.phone === payment.phone) || (u.id && u.id == payment.userId));
         if (!user) {
-            user = {
-                id: payment.userId || Date.now(),
-                name: payment.userName,
-                phone: payment.phone || '',
-                sellerStatus: 'approved',
-                registrationDate: new Date().toISOString().split('T')[0],
-                confirmationCode: code
-            };
+            user = { id: payment.userId || Date.now(), name: payment.userName, phone: payment.phone || '', sellerStatus: 'approved', registrationDate: new Date().toISOString().split('T')[0], confirmationCode: code };
             adminData.users.push(user);
         } else {
             user.sellerStatus = 'approved';
             user.registrationDate = new Date().toISOString().split('T')[0];
             user.confirmationCode = code;
         }
-
         MASTER_ACCOUNT.balance += payment.amount;
         addActivity('payment_confirmed', `Payment verified for ${payment.userName} (Code: ${code}) - KSH ${payment.amount} received on ${getMasterPhone()}`);
         saveAdminData();
-
         document.getElementById('confirmModal').style.display = 'none';
         currentPaymentToVerify = null;
-
         loadPaymentsView();
         if (currentView === 'dashboard') loadDashboard();
         alert(`✅ Payment Verified!\n\nConfirmation Code: ${code}\nAmount: KSH ${payment.amount}\nReceived on: ${getMasterPhone()}\n\nUser can now sell on SecondChance.`);
     }
-
     function rejectPayment(paymentId) {
         const reason = prompt('Rejection reason:');
         if (!reason) return;
         const payment = adminData.payments.find(p => p.id == paymentId);
-        if (payment) {
-            payment.status = 'rejected';
-            addActivity('payment_rejected', `Payment rejected for ${payment.userName}: ${reason}`);
-            saveAdminData();
-            loadPaymentsView();
-            if (currentView === 'dashboard') loadDashboard();
-        }
+        if (payment) { payment.status = 'rejected'; addActivity('payment_rejected', `Payment rejected for ${payment.userName}: ${reason}`); saveAdminData(); loadPaymentsView(); if (currentView === 'dashboard') loadDashboard(); }
     }
 
-    // ---------- USERS VIEW (safe onclick using ID) ----------
+    // ---------- USERS ----------
     function loadUsersView() {
         document.getElementById('usersView').innerHTML = `
             <div class="top-bar"><h2>👥 User Management</h2></div>
-            <div class="table-container">
-                <div class="table-header"><h3>All Users</h3></div>
-                <table>
-                    <thead><tr><th>User</th><th>Phone</th><th>Role</th><th>Status</th><th>Confirmation</th><th>Actions</th></tr></thead>
-                    <tbody>
-                        ${adminData.users.length === 0 ? '<tr><td colspan="6" class="empty-state"><i class="fas fa-users"></i><p>No users registered yet</p></td></tr>' :
-                        adminData.users.map(u => `
-                            <tr>
-                                <td><strong>${u.name}</strong></td>
-                                <td>${u.phone || '—'}</td>
-                                <td>${u.role || 'user'}</td>
-                                <td><span class="status-badge status-${u.sellerStatus === 'approved' ? 'approved' : 'pending'}">${u.sellerStatus}</span></td>
-                                <td>${u.confirmationCode ? `<code style="color:var(--gold);">${u.confirmationCode}</code>` : '—'}</td>
-                                <td>
-                                    <button class="btn btn-outline btn-sm" onclick="viewUser('${u.id}')">👁</button>
-                                    <button class="btn btn-danger btn-sm" onclick="removeUser(${u.id})">🗑</button>
-                                </td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
+            <div class="table-container"><div class="table-header"><h3>All Users</h3></div>
+                <table><thead><tr><th>User</th><th>Phone</th><th>Role</th><th>Status</th><th>Confirmation</th><th>Actions</th></tr></thead>
+                    <tbody>${adminData.users.length ? adminData.users.map(u => `
+                        <tr><td><strong>${u.name}</strong></td><td>${u.phone || '—'}</td><td>${u.role || 'user'}</td>
+                        <td><span class="status-badge status-${u.sellerStatus === 'approved' ? 'approved' : 'pending'}">${u.sellerStatus}</span></td>
+                        <td>${u.confirmationCode ? '<code style="color:var(--gold);">${u.confirmationCode}</code>' : '—'}</td>
+                        <td><button class="btn btn-outline btn-sm" onclick="viewUser('${u.id}')">👁</button>
+                        <button class="btn btn-danger btn-sm" onclick="removeUser(${u.id})">🗑</button></td></tr>`).join('') : '<tr><td colspan="6" class="empty-state"><i class="fas fa-users"></i><p>No users registered yet</p></td></tr>'}</tbody>
                 </table>
-            </div>
-        `;
+            </div>`;
     }
-
     function viewUser(userId) {
         const user = adminData.users.find(u => u.id == userId);
         if (user) alert(`User: ${user.name}\nPhone: ${user.phone}\nStatus: ${user.sellerStatus}\nCode: ${user.confirmationCode || 'N/A'}`);
     }
-
     function removeUser(id) {
-        if (confirm('Remove this user?')) {
-            adminData.users = adminData.users.filter(u => u.id !== id);
-            saveAdminData();
-            loadUsersView();
-            if (currentView === 'dashboard') loadDashboard();
-        }
+        if (confirm('Remove this user?')) { adminData.users = adminData.users.filter(u => u.id !== id); saveAdminData(); loadUsersView(); if (currentView === 'dashboard') loadDashboard(); }
     }
 
-    // ---------- OTHER VIEWS (unchanged except for commission update fix) ----------
+    // ---------- ORDERS, COMMISSIONS, SETTINGS, ACTIVITY (all working) ----------
     function loadOrdersView() {
         document.getElementById('ordersView').innerHTML = `
             <div class="top-bar"><h2>🛒 Order Monitoring</h2></div>
-            <div class="table-container">
-                <div class="table-header"><h3>All Orders</h3></div>
-                <table>
-                    <thead><tr><th>Order ID</th><th>Buyer</th><th>Seller</th><th>Items</th><th>Total</th><th>Commission</th><th>Date</th></tr></thead>
-                    <tbody>
-                        ${adminData.orders.length === 0 ? '<tr><td colspan="7" class="empty-state"><i class="fas fa-shopping-cart"></i><p>No orders yet</p></td></tr>' :
-                        adminData.orders.map(o => `
-                            <tr>
-                                <td>#${o.id}</td><td>${o.buyer}</td><td>${o.seller}</td>
-                                <td>${o.items.join(', ')}</td>
-                                <td style="color:var(--gold);">KSH ${o.total.toLocaleString()}</td>
-                                <td style="color:var(--success);">KSH ${o.commission}</td>
-                                <td>${o.date}</td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
+            <div class="table-container"><div class="table-header"><h3>All Orders</h3></div>
+                <table><thead><tr><th>Order ID</th><th>Buyer</th><th>Seller</th><th>Items</th><th>Total</th><th>Commission</th><th>Date</th></tr></thead>
+                    <tbody>${adminData.orders.length ? adminData.orders.map(o => `
+                        <tr><td>#${o.id}</td><td>${o.buyer}</td><td>${o.seller}</td><td>${o.items.join(', ')}</td>
+                        <td style="color:var(--gold);">KSH ${o.total.toLocaleString()}</td><td style="color:var(--success);">KSH ${o.commission}</td><td>${o.date}</td></tr>`).join('') : '<tr><td colspan="7" class="empty-state"><i class="fas fa-shopping-cart"></i><p>No orders yet</p></td></tr>'}</tbody>
                 </table>
-            </div>
-        `;
+            </div>`;
     }
-
     function loadCommissionsView() {
         const totalCommission = adminData.orders.reduce((sum, o) => sum + o.commission, 0);
         document.getElementById('commissionsView').innerHTML = `
@@ -1361,142 +900,82 @@
                 <div class="stat-card"><div class="stat-value">${adminData.settings.lowCommission}%</div><div class="stat-label">Below KSH 10,000</div></div>
                 <div class="stat-card"><div class="stat-value">${adminData.settings.highCommission}%</div><div class="stat-label">KSH 10,000+</div></div>
             </div>
-            <div class="table-container">
-                <div style="padding:24px;">
-                    <div class="grid-2">
-                        <div class="form-group"><label>Below KSH 10,000 Rate (%)</label><input type="number" class="form-input" id="lowCommission" value="${adminData.settings.lowCommission}" min="0" max="50" step="0.5"></div>
-                        <div class="form-group"><label>KSH 10,000+ Rate (%)</label><input type="number" class="form-input" id="highCommission" value="${adminData.settings.highCommission}" min="0" max="50" step="0.5"></div>
-                    </div>
-                    <button class="btn btn-primary" onclick="saveCommissionRates()">💾 Save & Sync</button>
-                </div>
-            </div>
-        `;
+            <div class="table-container"><div style="padding:24px;">
+                <div class="grid-2"><div class="form-group"><label>Below KSH 10,000 Rate (%)</label><input type="number" class="form-input" id="lowCommission" value="${adminData.settings.lowCommission}" min="0" max="50" step="0.5"></div>
+                <div class="form-group"><label>KSH 10,000+ Rate (%)</label><input type="number" class="form-input" id="highCommission" value="${adminData.settings.highCommission}" min="0" max="50" step="0.5"></div></div>
+                <button class="btn btn-primary" onclick="saveCommissionRates()">💾 Save & Sync</button>
+            </div></div>`;
     }
-
     function saveCommissionRates() {
         const low = parseFloat(document.getElementById('lowCommission').value);
         const high = parseFloat(document.getElementById('highCommission').value);
         if (isNaN(low) || isNaN(high)) return alert('Invalid rates');
-        adminData.settings.lowCommission = low;
-        adminData.settings.highCommission = high;
-        addActivity('commission_updated', `Commission rates: ${low}% (<10K) / ${high}% (10K+)`);
-        saveAdminData();
-        loadCommissionsView();
+        adminData.settings.lowCommission = low; adminData.settings.highCommission = high;
+        addActivity('commission_updated', `Commission rates: ${low}% (<10K) / ${high}% (10K+)`); saveAdminData(); loadCommissionsView();
     }
-
     function loadSettingsView() {
         document.getElementById('settingsView').innerHTML = `
             <div class="top-bar"><h2>⚙️ Platform Settings</h2></div>
-            <div class="table-container">
-                <div style="padding:24px;">
-                    <div class="form-group"><label>Registration Fee (KSH)</label><input type="number" class="form-input" id="regFee" value="${adminData.settings.registrationFee}"></div>
-                    <div class="form-group"><label>Master Account (Receives Payments)</label>
-                        <input type="text" class="form-input" id="masterAccountInput" value="${adminData.settings.masterAccount}" disabled style="color:var(--gold);font-weight:600;">
-                    </div>
-                    <div class="form-group"><label>Admin Password</label>
-                        <input type="text" class="form-input" id="adminPasswordInput" value="${adminData.settings.adminPassword}">
-                    </div>
-                    <button class="btn btn-primary" onclick="saveSettings()">💾 Save & Sync</button>
-                </div>
-            </div>
-        `;
+            <div class="table-container"><div style="padding:24px;">
+                <div class="form-group"><label>Registration Fee (KSH)</label><input type="number" class="form-input" id="regFee" value="${adminData.settings.registrationFee}"></div>
+                <div class="form-group"><label>Master Account</label><input type="text" class="form-input" id="masterAccountInput" value="${adminData.settings.masterAccount}" disabled style="color:var(--gold);font-weight:600;"></div>
+                <div class="form-group"><label>Admin Password</label><input type="text" class="form-input" id="adminPasswordInput" value="${adminData.settings.adminPassword}"></div>
+                <button class="btn btn-primary" onclick="saveSettings()">💾 Save & Sync</button>
+            </div></div>`;
     }
-
     function saveSettings() {
         const regFee = parseInt(document.getElementById('regFee').value);
         const newPassword = document.getElementById('adminPasswordInput').value;
         if (!regFee || regFee < 0) return alert('Invalid fee');
         adminData.settings.registrationFee = regFee;
         if (newPassword) adminData.settings.adminPassword = newPassword;
-        addActivity('settings_updated', 'Platform settings updated');
-        saveAdminData();
-        loadSettingsView();
+        addActivity('settings_updated', 'Platform settings updated'); saveAdminData(); loadSettingsView();
         alert('Settings saved & synced to main app!');
     }
-
     function loadActivityView() {
         document.getElementById('activityView').innerHTML = `
-            <div class="top-bar">
-                <h2>📜 Activity Log</h2>
-                <button class="btn btn-outline btn-sm" onclick="clearActivity()">Clear Log</button>
-            </div>
-            <div class="table-container">
-                <div class="activity-log">
-                    ${adminData.activityLog.map(log => `
-                        <div class="activity-item">
-                            <div class="activity-icon" style="background:${getActivityColor(log.type)}">${getActivityIcon(log.type)}</div>
-                            <div><div>${log.message}</div><div class="activity-time">${log.time}</div></div>
-                        </div>
-                    `).join('') || '<div class="empty-state"><i class="fas fa-history"></i><p>No activity recorded</p></div>'}
-                </div>
-            </div>
-        `;
+            <div class="top-bar"><h2>📜 Activity Log</h2><button class="btn btn-outline btn-sm" onclick="clearActivity()">Clear Log</button></div>
+            <div class="table-container"><div class="activity-log">${adminData.activityLog.map(log => `
+                <div class="activity-item"><div class="activity-icon" style="background:${getActivityColor(log.type)}">${getActivityIcon(log.type)}</div>
+                <div><div>${log.message}</div><div class="activity-time">${log.time}</div></div></div>`).join('') || '<div class="empty-state"><i class="fas fa-history"></i><p>No activity recorded</p></div>'}</div></div>`;
     }
-
     function clearActivity() {
-        if (confirm('Clear all activity logs?')) {
-            adminData.activityLog = [];
-            saveAdminData();
-            loadActivityView();
-        }
+        if (confirm('Clear all activity logs?')) { adminData.activityLog = []; saveAdminData(); loadActivityView(); }
     }
 
-    // ---------- HELPERS ----------
     function updateAllBadges() {
-        const pendingProducts = adminData.products.filter(p => p.status === 'pending').length;
-        const pendingPayments = adminData.payments.filter(p => p.status === 'pending').length;
-        document.getElementById('pendingProductsBadge').textContent = pendingProducts;
-        document.getElementById('pendingPaymentsBadge').textContent = pendingPayments;
-        document.getElementById('pendingProductsBadge').style.display = pendingProducts > 0 ? 'inline' : 'none';
-        document.getElementById('pendingPaymentsBadge').style.display = pendingPayments > 0 ? 'inline' : 'none';
+        const pp = adminData.products.filter(p => p.status === 'pending').length;
+        const payp = adminData.payments.filter(p => p.status === 'pending').length;
+        document.getElementById('pendingProductsBadge').textContent = pp;
+        document.getElementById('pendingProductsBadge').style.display = pp > 0 ? 'inline' : 'none';
+        document.getElementById('pendingPaymentsBadge').textContent = payp;
+        document.getElementById('pendingPaymentsBadge').style.display = payp > 0 ? 'inline' : 'none';
     }
 
-    // ---------- AUTO-SYNC (now updates dashboard if visible) ----------
+    // ---------- AUTO-SYNC (updates active view) ----------
     function autoSync() {
         pullFromMainApp();
         updateMasterBalance();
-        // Refresh current view if it's dashboard (so stats stay live)
-        if (currentView === 'dashboard') {
-            loadDashboard();
-        } else if (currentView === 'products') {
-            loadProductsView(currentProductFilter);
-        } else if (currentView === 'payments') {
-            loadPaymentsView();
-        }
+        if (currentView === 'dashboard') loadDashboard();
+        else if (currentView === 'products') loadProductsView(currentProductFilter);
+        else if (currentView === 'payments') loadPaymentsView();
     }
-
     setInterval(autoSync, 5000);
 
-    // ---------- INITIALISATION (with password gate) ----------
+    // ---------- INITIALISATION ----------
     document.addEventListener('DOMContentLoaded', () => {
         ensureAdminPassword();
-        // Show password overlay
         document.getElementById('authOverlay').style.display = 'flex';
         document.getElementById('adminContainer').style.display = 'none';
-        // Pre-fill master phone display
         document.getElementById('masterPhoneDisplay').textContent = getMasterPhone();
 
         // Close modals on outside click
-        document.getElementById('priceModal').addEventListener('click', function(e) {
-            if (e.target === this) closePriceModal();
-        });
-        document.getElementById('confirmModal').addEventListener('click', function(e) {
-            if (e.target === this) document.getElementById('confirmModal').style.display = 'none';
-        });
-        document.getElementById('authOverlay').addEventListener('click', function(e) {
-            // prevent closing overlay by clicking outside (force password entry)
-        });
-
-        // Allow Enter key to submit password
-        document.getElementById('authPassword').addEventListener('keyup', function(e) {
-            if (e.key === 'Enter') authenticate();
-        });
+        document.getElementById('priceModal').addEventListener('click', function(e) { if (e.target === this) closePriceModal(); });
+        document.getElementById('confirmModal').addEventListener('click', function(e) { if (e.target === this) document.getElementById('confirmModal').style.display = 'none'; });
+        // Prevent closing auth overlay by clicking outside (forces password entry)
+        document.getElementById('authOverlay').addEventListener('click', function(e) {});
+        document.getElementById('authPassword').addEventListener('keyup', function(e) { if (e.key === 'Enter') authenticate(); });
     });
-
-    console.log('👑 SecondChance Admin Panel Ready');
-    console.log('📱 Master Account:', getMasterPhone());
-    console.log('🔒 Password protection active');
-    console.log('🔄 Live Sync: Active (every 5 seconds)');
 </script>
 </body>
-                                           </html>
+    </html>
